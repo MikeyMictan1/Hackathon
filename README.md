@@ -1,1 +1,1 @@
-Hackathon README
+Hackathon <WHACK> README
