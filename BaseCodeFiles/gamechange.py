@@ -140,7 +140,7 @@ class GameOver(GameChange):
 
         # other text
         self.__game_over_txt = self.game_change_font.render("GAME OVER!", 1, gf.white)
-        self.__game_over_music = pygame.mixer.Sound("../Audio/game_over_music.mp3")
+
 
     def run(self, points: float):
         """
@@ -153,11 +153,6 @@ class GameOver(GameChange):
         """
         self.__end_points = int(points)
         self.__score_txt = self.game_change_points_font.render(f"POINTS BEFORE DEATH:{self.__end_points}", 1, gf.white)
-
-        #  plays game over music
-        pygame.mixer.stop()
-        self.__game_over_music.play()
-        self.__game_over_music.set_volume(0.1)
 
         while self.game_over_state:  # while we are in the game over menu
             self.event_quit()
