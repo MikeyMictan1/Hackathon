@@ -137,6 +137,7 @@ class Pet(pygame.sprite.Sprite):
 
         self.image = self.__animation_dict[self.__state][int(self.__frame)]
         self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
+        self.hunger -= 1
 
 '''test = Pet()
 test.changeHunger(-22)
