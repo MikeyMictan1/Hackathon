@@ -7,21 +7,16 @@ hunger, happiness, thirst
 
 class Pet:
 #
-    def __init__(self, name, hunger, happiness, thirst):
+    def __init__(self):
     #
         self.dead = False
-        self.name = name
-        self.maxHunger,self.hunger = hunger
-        self.maxHappiness, self.happiness = happiness
-        self.maxThirst, self.thirst = thirst
-        self.time = datetime.datetime.now()
+        self.name = "chip"
+        self.maxHunger,self.hunger = 100,100
+        self.maxHappiness, self.happiness = 100,100
+        self.maxThirst, self.thirst = 100,100
         self.highenough = 80
         self.tooLow = 20
         self.happinessTick = -4
-    #
-    def resetTime(self):
-    #
-        time = datetime.datetime.now()
     #
     #increments hunger by a certain amount
     def changeHunger(self, hungerChange ):
@@ -85,3 +80,9 @@ class Pet:
         #
     #
 #
+
+test = Pet()
+test.changeHunger(-22)
+print(test.hunger, " is hunger")
+test.updateHappiness(3)
+print(test.happiness)
