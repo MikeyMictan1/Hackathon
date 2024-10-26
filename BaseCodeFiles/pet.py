@@ -96,6 +96,12 @@ class Pet(pygame.sprite.Sprite):
         #
             dead = True
         #
+    #
+
+    def updatePet(self,numhours):
+    #
+        a =0
+    #
     # MIKEY PYGAME STUFF GO AWAY ADRIAN EWW C-CODER--------
     def update(self):
         self.hud()
