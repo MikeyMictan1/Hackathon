@@ -4,8 +4,8 @@ import os
 # --- GAME SETTINGS SETUP ---
 # game size
 tile_size = 150
-screen_width = 1200
-screen_height = 6 * tile_size
+screen_width = 8* tile_size
+screen_height = 5 * tile_size
 
 # game frames per second, and number of levels
 FPS = 60
