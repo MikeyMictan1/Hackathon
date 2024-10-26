@@ -116,6 +116,11 @@ class Pet(pygame.sprite.Sprite):
         self.thirst_text= self.general_font.render(f"Thirst:       {self.thirst}", True, (255,255,255))
         self.__screen.blit(self.thirst_text,(gf.screen_width // 15, gf.screen_height // 6.5))
 
+        self.home_text = gf.smaller_title_font.render(f"Chip's Humble Abode", True, (255, 255, 255))
+        self.__screen.blit(self.home_text, (gf.img_centre(self.home_text)[0], gf.screen_height // 20))
+
+
+
     def animation(self):
         self.__frame += self.__frame_speed
         if self.__frame >= len(self.__animation_dict["idle"]):  # could be any folder, but took the first one
