@@ -3,7 +3,7 @@ import pygame
 import homelayout as mz_lay
 import globalfunctions as gf
 import camera as cam
-#import pet as chip
+import pet as pet
 from datetime import datetime
 import csv, os
 
@@ -63,7 +63,7 @@ class MazeLevel:
             layout_lst (list): The depth-first maze as a list.
         """
         self.__maze_loop(layout_lst, self.__check_home_layout)  # loops through the maze, putting walls, floors in place
-
+        self.__maze_loop(layout_lst, self.__check_home_elements)
 
     @staticmethod
     def __maze_loop(maze_lst: list, check_maze_cell):  # loops through every cell in the maze
@@ -107,8 +107,8 @@ class MazeLevel:
 
     def __check_home_elements(self, cell: str, position: tuple):
         if cell == "P":
-            #self.chip = pet.Pet(position, [self.__game_camera], self.__wall_sprites)
-            ...
+            self.chip = pet.Pet(position, [self.__game_camera], self.__wall_sprites)
+
 
     def compareTime (self):
     #

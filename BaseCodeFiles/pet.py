@@ -13,12 +13,13 @@ class Pet(pygame.sprite.Sprite):
         super().__init__(groups)
         self.__wall_sprites = wall_sprites
         self.__position = pos
-        self.__rect_width = 100
-        self.__rect_height = 100
+        self.__rect_width = 200
+        self.__rect_height = 200
         self.__screen = pygame.display.get_surface()
 
         # hud infos
         self.__controls_font = pygame.font.Font("../Fonts/Pixel.ttf", 30)
+        self.general_font = pygame.font.Font("../Fonts/Primer.otf", 40)
 
         # animations
         self.__frame = 0
@@ -106,13 +107,13 @@ class Pet(pygame.sprite.Sprite):
         self.animation()
 
     def hud(self):
-        self.happiness_text = self.__controls_font.render(f"Happiness: {self.happiness}", True, (255,255,255))
+        self.happiness_text = self.general_font.render(f"Happiness: {self.happiness}", True, (255,255,255))
         self.__screen.blit(self.happiness_text,(gf.screen_width // 15, gf.screen_height // 10))
 
-        self.hunger_text = self.__controls_font.render(f"Hunger: {self.hunger}", True, (255,255,255))
+        self.hunger_text = self.general_font.render(f"Hunger:     {self.hunger}", True, (255,255,255))
         self.__screen.blit(self.hunger_text,(gf.screen_width // 15, gf.screen_height // 20))
 
-        self.thirst_text= self.__controls_font.render(f"Thirst: {self.thirst}", True, (255,255,255))
+        self.thirst_text= self.general_font.render(f"Thirst:       {self.thirst}", True, (255,255,255))
         self.__screen.blit(self.thirst_text,(gf.screen_width // 15, gf.screen_height // 6.5))
 
     def animation(self):
@@ -121,6 +122,8 @@ class Pet(pygame.sprite.Sprite):
             self.__frame = 0
 
         self.image = self.__animation_dict[self.__state][int(self.__frame)]
+        self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
+
 
 #test = Pet()
 #test.changeHunger(-22)
