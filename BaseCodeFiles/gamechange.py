@@ -128,7 +128,7 @@ class GameOver(GameChange):
         self.__background = pygame.transform.scale(self.__background, (gf.screen_width, gf.screen_height))
 
         # other text
-        self.__game_over_txt = gf.title_font.render("Chip Died! xD", 1, gf.white)
+        self.__game_over_txt = gf.title_font.render("Your Pet Died!", 1, gf.white)
 
 #
     def run(self):
