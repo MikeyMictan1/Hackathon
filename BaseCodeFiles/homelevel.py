@@ -3,6 +3,9 @@ import pygame
 import homelayout as mz_lay
 import globalfunctions as gf
 import camera as cam
+import pet as pet
+from datetime import datetime
+import csv, os
 
 class MazeLevel:
     """
@@ -41,13 +44,15 @@ class MazeLevel:
         self.__sword_sprites = pygame.sprite.Group()
         self.__wall_sprites = pygame.sprite.Group()
         self.__game_camera = cam.GameCamera()
-
+        self.lastTimeCheck = datetime.now() # change this later becuase it should be initialised to what is in the file if there is one
         # maze creation
         self.create_pygame_home(layout_list)
 
         # other setup
         self.is_active = True
         self.level_type = "normal"
+
+        self.csv_file = 'last_run_date.csv'
 
     def create_pygame_home(self, layout_lst):  # creates the completed pygame maze
         """
@@ -57,8 +62,8 @@ class MazeLevel:
         Parameters:
             layout_lst (list): The depth-first maze as a list.
         """
-        self.__maze_loop(layout_lst, self.__check_maze_layout)  # loops through the maze, putting walls, floors in place
-
+        self.__maze_loop(layout_lst, self.__check_home_layout)  # loops through the maze, putting walls, floors in place
+        self.__maze_loop(layout_lst, self.__check_home_elements)
 
     @staticmethod
     def __maze_loop(maze_lst: list, check_maze_cell):  # loops through every cell in the maze
@@ -81,7 +86,7 @@ class MazeLevel:
                 position = (col_num * gf.tile_size, row_num * gf.tile_size)
                 check_maze_cell(cell, position)
 
-    def __check_maze_layout(self, cell: str, position: tuple):
+    def __check_home_layout(self, cell: str, position: tuple):
         """
         Description:
         Checks a cell, and makes that cell into a wall or floor sprite, depending on what letter the cell is.
@@ -97,9 +102,63 @@ class MazeLevel:
         if cell == "Y":
             mz_lay.WallVisible(position, [self.__game_camera, self.__wall_sprites])
 
-        if cell in " PUECOSH":  # if there are floor tiles, including on the player
+        if cell in " P":  # if there are floor tiles, including on the player
             self.floor = mz_lay.Floor(position, [self.__game_camera])
 
+    def __check_home_elements(self, cell: str, position: tuple):
+        if cell == "P":
+            self.chip = pet.Pet(position, [self.__game_camera], self.__wall_sprites)
+
+
+    def compareTimeHours (self):
+    #
+        currentTime = datetime.now()
+        difference = currentTime - self.lastTimeCheck
+        diffHours = (difference.total_seconds() / 3600)
+        print(diffHours)
+        if diffHours > 1:
+        #
+            self.lastTimeCheck = currentTime
+            return int(diffHours)
+        #
+        return 0
+    #
+    def updatePet (self, chip):
+    #
+        diffHours = self.compareTimeHours()
+        if (diffHours > 0):
+        #
+            chip.updatePet(diffHours)
+        #
+    #
     def run_level(self):
         self.__game_camera.draw_camera_offset()
         self.__game_camera.update()
+        self.update_time()
+        self.updatePet(self.chip)
+
+    # Functions that deal with time every day
+    def update_time(self):
+        last_run_date = self.check_last_date()
+        current_date = datetime.now()
+        if last_run_date is None or current_date.date() > last_run_date.date():
+
+            print("hi")
+            # Update the CSV with the current date
+            self.check_current_date()
+
+    def check_current_date(self):
+        with open(self.csv_file, 'w', newline='') as file:
+            writer = csv.writer(file)
+            current_date = datetime.now().strftime('%Y-%m-%d')
+            writer.writerow([current_date])
+
+    def check_last_date(self):
+        if os.path.exists(self.csv_file):
+            with open(self.csv_file, 'r') as file:
+                reader = csv.reader(file)
+                for row in reader:
+                    # Parse the stored date into a datetime object
+                    last_run_date = datetime.strptime(row[0], '%Y-%m-%d')
+                    return last_run_date
+        return None

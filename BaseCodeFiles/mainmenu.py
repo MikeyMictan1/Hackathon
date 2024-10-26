@@ -28,7 +28,7 @@ class MainMenu:
         self.__menu_graphics_dict = gf.import_graphics_dict("menu", self.__menu_graphics_dict, "../Graphics")
 
         # menu titles and background
-        self.__main_menu_title = gf.font.render("Main Menu", 1, gf.white)
+        self.__main_menu_title = gf.title_font.render("Pet Payday", 1, gf.white)
         self.__background = self.__menu_graphics_dict["background"][0]
         self.__background = pygame.transform.scale(self.__background, (gf.screen_width, gf.screen_height))
 

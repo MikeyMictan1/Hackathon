@@ -2,7 +2,9 @@ import pygame
 import globalfunctions as gf
 import mainmenu as mn_menu
 import homelevel as home_lvl
-import levellayout as lvl
+from BaseCodeFiles import levellayout as lvl
+import gamechange as g_change
+
 #hi
 class Main:
     def __init__(self):
@@ -17,6 +19,7 @@ class Main:
 
         # level initialisation
         self.__home_level = home_lvl.MazeLevel(lvl.home)
+        self.game_over = g_change.GameOver()
 
     def run(self):
         while self.__in_game:
@@ -51,6 +54,9 @@ class Main:
             self.__main_menu.in_menu = False
             self.__home_level.run_level()
             self.__main_menu.game_on = False
+
+    def check_game_over(self):
+        self.game_over.run(...)
 
 main = Main()
 main.run()
