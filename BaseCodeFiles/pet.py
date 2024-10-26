@@ -39,7 +39,9 @@ class Pet(pygame.sprite.Sprite):
         self.maxThirst, self.thirst = 100,100
         self.highenough = 80
         self.tooLow = 20
-        self.happinessTick = -4
+        self.happinessTick = -2
+        self.hungerTick = -3
+        self.thirstTick = -1
     #
     #increments hunger by a certain amount
     def changeHunger(self, hungerChange ):
@@ -105,7 +107,9 @@ class Pet(pygame.sprite.Sprite):
 
     def updatePet(self,numhours):
     #
-        a =0
+        self.changeHunger(self.hungerTick * numhours)
+        self.changeThirst(self.thirstTick * numhours)
+        self.updateHappiness(numhours)
     #
     # MIKEY PYGAME STUFF GO AWAY ADRIAN EWW C-CODER--------
     def update(self):
@@ -131,8 +135,9 @@ class Pet(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
 
 
-#test = Pet()
-#test.changeHunger(-22)
-#print(test.hunger, " is hunger")
-#test.updateHappiness(3)
-#print(test.happiness)
+'''test = Pet()
+test.changeHunger(-22)
+print(test.hunger, " is hunger")
+test.updatePet(3)
+print(test.happiness)
+print(test.hunger, " is hunger 2")'''
