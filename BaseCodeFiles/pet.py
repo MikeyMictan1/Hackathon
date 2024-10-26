@@ -102,12 +102,14 @@ class Pet(pygame.sprite.Sprite):
 
     def hud(self):
         self.happiness_text = self.__controls_font.render(f"Happiness: {self.happiness}", True, (255,255,255))
-        self.__screen.blit(self.happiness_text,(gf.screen_width // 10, gf.screen_height // 10))
+        self.__screen.blit(self.happiness_text,(gf.screen_width // 15, gf.screen_height // 10))
 
         self.hunger_text = self.__controls_font.render(f"Hunger: {self.hunger}", True, (255,255,255))
-        self.__screen.blit(self.hunger_text,(gf.screen_width // 10, gf.screen_height // 20))
+        self.__screen.blit(self.hunger_text,(gf.screen_width // 15, gf.screen_height // 20))
 
-        self.hunger -=1
+        self.thirst_text= self.__controls_font.render(f"Thirst: {self.thirst}", True, (255,255,255))
+        self.__screen.blit(self.thirst_text,(gf.screen_width // 15, gf.screen_height // 6.5))
+
 
 #test = Pet()
 #test.changeHunger(-22)
