@@ -21,8 +21,7 @@ class SavingsMenu(InGameMenu):
     """
     def __init__(self):
         super().__init__()
-        self.__control_set_image = pygame.image.load("../Graphics/controls/control_set.png")
-        self.__control_set_image = pygame.transform.scale(self.__control_set_image, (500, 600))
+
 
     def display_menu(self):
         """
@@ -34,5 +33,4 @@ class SavingsMenu(InGameMenu):
             self.in_game_menu_state = False
 
         self.screen.blit(self.menu_overlay, (gf.img_centre(self.menu_overlay)[0], gf.img_centre(self.menu_overlay)[1]))
-        self.screen.blit(self.__control_set_image,
-                         (gf.img_centre(self.__control_set_image)[0], gf.img_centre(self.__control_set_image)[1]))
+
