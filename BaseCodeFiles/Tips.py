@@ -1,0 +1,7 @@
+class Tips:
+#
+    def __init__(self):
+    #
+        self.tips = {"99% of investors quit before they win big","It important to have definite goals for what you are saving up for.","The best time to start savin gup for something was a year ago. The second best time is today","Be proactive with your saving","Its good to understand what you need versus what you want","Its allways good to have a small amount of money in case of an emergency","a good way to stay motivated is to check how much you have saved","Sometimes its better to pay with cash so you set a limit on how much you can spend at a time compared to a card","try not to spend too much money on treats since you save money in the long term", "Sometimes its good to treat yourself when you reach a certain milestone","Sometimes it's hard to accept but saving money will allways take time","Sometimes its not allways to upgrade something when what you have works perfectly well", "make sure to take time to appreciate what you have to resist the urge to allways want more","Focus on the benefits of what you have saved will have in the future","Make sure to stick to your financial goals even if those around you want you to waste your money on something useless","Before buying something, ask if it aligns with you financial goals","Set goals to make saving slightly more fun","Sometimes its best to ask a trusted adult for advice if you ever need help","Make sure to stay committed and to allways remember that saving will benefit you in the long run" }
+    #
+#
