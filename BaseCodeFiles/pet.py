@@ -8,7 +8,7 @@ hunger, happiness, thirst
 
 class Pet(pygame.sprite.Sprite):
 #
-    def __init__(self, pos, groups, wall_sprites):
+    def __init__(self, pos, groups, wall_sprites,happiness,hunger,thirst):
         # mikey pygame changes ---
         super().__init__(groups)
         self.__wall_sprites = wall_sprites
@@ -34,9 +34,9 @@ class Pet(pygame.sprite.Sprite):
     #
         self.dead = False
         self.name = "chip"
-        self.maxHunger,self.hunger = 100,100
-        self.maxHappiness, self.happiness = 100,100
-        self.maxThirst, self.thirst = 100,100
+        self.maxHunger,self.hunger = 100,hunger
+        self.maxHappiness, self.happiness = 100,happiness
+        self.maxThirst, self.thirst = 100,thirst
         self.highenough = 80
         self.tooLow = 20
         self.happinessTick = -2
