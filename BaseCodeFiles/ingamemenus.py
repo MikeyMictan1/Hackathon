@@ -42,23 +42,42 @@ class InGameMenu(g_change.GameChange):
         self.in_game_menu_state = False
 
         # --- GRAPHICS ---
-        self.__in_game_menu_graphics_dict = {"continue": [], "overlay": []}
+        self.__in_game_menu_graphics_dict = {"continue": [], "overlay": [], "buy": []}
         self.__in_game_menu_graphics_dict = gf.import_graphics_dict("ingamemenu", self.__in_game_menu_graphics_dict,
                                                                  "../Graphics")
 
-        self.__quit_txt_pos = (gf.img_centre(self.quit_txt_white)[0], gf.screen_height // 1.3)
+        self.__quit_txt_pos = (gf.screen_width // 1.3, gf.screen_height // 1.3)
         self.__quit_option = btn.OptionPress(self.quit_txt_white, self.quit_txt_yellow, self.__quit_txt_pos)
 
         self.__continue_txt_white = self.__in_game_menu_graphics_dict["continue"][0]
         self.__continue_txt_yellow = self.__in_game_menu_graphics_dict["continue"][1]
-        self.__continue_txt_pos = (gf.img_centre(self.__continue_txt_white)[0], gf.screen_height // 1.75)
+        self.__continue_txt_pos = (gf.screen_width // 1.3, gf.screen_height // 1.75)
         self.__continue_option = btn.OptionPress(self.__continue_txt_white, self.__continue_txt_yellow,
                                              self.__continue_txt_pos)
 
         self.menu_overlay = self.__in_game_menu_graphics_dict["overlay"][0]
-        self.menu_overlay = pygame.transform.scale(self.menu_overlay, (1100, 800))
+        self.menu_overlay = pygame.transform.scale(self.menu_overlay, (1500, 800))
 
-        self.__in_game_menu_txt = gf.font.render("IN-GAME MENU", 1, gf.white)
+        self.buy_txt_white = self.__in_game_menu_graphics_dict["buy"][0]
+        self.buy_txt_yellow = self.__in_game_menu_graphics_dict["buy"][1]
+        # buying buttons
+        self.buy_food_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 3)
+        self.buy_food_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_food_pos)
+        self.food_price_txt = gf.medium_title_font.render("Price: 5", 1, gf.white)
+
+        self.buy_clothes_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 2)
+        self.buy_clothes_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_clothes_pos)
+        self.clothes_price_txt = gf.medium_title_font.render("Price: 5", 1, gf.white)
+
+        self.buy_drinks_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 1.5)
+        self.buy_drinks_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_drinks_pos)
+        self.drinks_price_txt = gf.medium_title_font.render("Price: 5", 1, gf.white)
+
+        self.buy_decorations_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 1.2)
+        self.buy_decorations_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_decorations_pos)
+        self.decorations_price_txt = gf.medium_title_font.render("Price: 5", 1, gf.white)
+
+        self.__in_game_menu_txt = gf.title_font.render("SHOP", 1, gf.white)
         # --- GRAPHICS ---
 
         self.escape_counter = 0
@@ -83,11 +102,36 @@ class InGameMenu(g_change.GameChange):
             self.in_game_menu_state = False
 
         self.screen.blit(self.menu_overlay, (gf.img_centre(self.menu_overlay)[0], gf.img_centre(self.menu_overlay)[1]))
-        self.screen.blit(self.__in_game_menu_txt, (gf.img_centre(self.__in_game_menu_txt)[0], gf.screen_height // 10))
+        self.screen.blit(self.__in_game_menu_txt, (gf.img_centre(self.__in_game_menu_txt)[0], gf.screen_height // 30))
 
         # draws menu buttons
         self.__continue_option.draw(pygame.display.get_surface())
         self.__quit_option.draw(pygame.display.get_surface())
+
+        self.buy_food_option.draw(pygame.display.get_surface())
+        self.screen.blit(self.food_price_txt, (gf.img_centre(self.buy_txt_white)[0]-250, gf.screen_height // 3 +30))
+
+        self.buy_clothes_option.draw(pygame.display.get_surface())
+        self.screen.blit(self.clothes_price_txt, (gf.img_centre(self.buy_txt_white)[0]-250, gf.screen_height // 2 +30))
+
+        self.buy_drinks_option.draw(pygame.display.get_surface())
+        self.screen.blit(self.drinks_price_txt, (gf.img_centre(self.buy_txt_white)[0]-250, gf.screen_height // 1.5 +30))
+
+        self.buy_decorations_option.draw(pygame.display.get_surface())
+        self.screen.blit(self.decorations_price_txt, (gf.img_centre(self.buy_txt_white)[0]-250, gf.screen_height // 1.2 +30))
+
+
+        if self.buy_food_option.pressed:
+            ...
+
+        if self.buy_clothes_option.pressed:
+            ...
+
+        if self.buy_drinks_option.pressed:
+            ...
+
+        if self.buy_decorations_option.pressed:
+            ...
 
         if self.__continue_option.pressed:  # if continue button pressed, close menu
             self.escape_counter += 1
