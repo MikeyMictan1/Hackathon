@@ -33,13 +33,15 @@ class InGameMenu(g_change.GameChange):
         __in_game_menu_sound (pygame.mixer.Sound): Sound to be played whenever the in-game menu is opened/closed
         escape_counter (int): The number of times a button that opens the in game menu has been pressed
     """
-    def __init__(self):
+    def __init__(self, player, chip):
         """
         Description:
             Initialisation function for the in game menu class.
         """
         super().__init__()
         self.in_game_menu_state = False
+        self.player = player
+        self.chip = chip
 
         # --- GRAPHICS ---
         self.__in_game_menu_graphics_dict = {"continue": [], "overlay": [], "buy": []}
@@ -141,34 +143,3 @@ class InGameMenu(g_change.GameChange):
         if self.__quit_option.pressed:  # quits the game if "quit" is pressed
             pygame.quit()
             sys.exit()
-
-
-class ControlsMenu(InGameMenu):
-    """
-    Description:
-        Class for the controls menu UI that can be opened at any time while the player is in a level.
-
-    Inherits:
-        InGameMenu: inherits from the in game menu for certain attributes such as menu_overlay, escape_counter and
-        in_game_menu_state
-
-    Attributes:
-        __control_set_image (pygame.Surface): Image containing all the controls of the game
-    """
-    def __init__(self):
-        super().__init__()
-        self.__control_set_image = pygame.image.load("../Graphics/controls/control_set.png")
-        self.__control_set_image = pygame.transform.scale(self.__control_set_image, (500, 600))
-
-    def display_menu(self):
-        """
-        Description:
-            Displays the controls menu on the screen.
-        """
-        # makes sure the menu will open and close after open/close buttons are pressed
-        if self.escape_counter % 2 == 0:
-            self.in_game_menu_state = False
-
-        self.screen.blit(self.menu_overlay, (gf.img_centre(self.menu_overlay)[0], gf.img_centre(self.menu_overlay)[1]))
-        self.screen.blit(self.__control_set_image,
-                         (gf.img_centre(self.__control_set_image)[0], gf.img_centre(self.__control_set_image)[1]))

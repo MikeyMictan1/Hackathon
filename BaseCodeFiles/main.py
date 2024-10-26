@@ -21,8 +21,8 @@ class Main:
         # level initialisation
         self.__home_level = home_lvl.MazeLevel(lvl.home)
         self.game_over = g_change.GameOver()
-        self.in_game_menu = ig_menu.InGameMenu()
-        self.savings_menu = sav_menu.SavingsMenu()
+        self.in_game_menu = ig_menu.InGameMenu(self.__home_level.player, self.__home_level.chip)
+        self.savings_menu = sav_menu.SavingsMenu(self.__home_level.player, self.__home_level.chip)
 
     def run(self):
         while self.__in_game:
@@ -57,7 +57,7 @@ class Main:
             # -- CHECKS IF IN SAVINGS MENU --
             if self.savings_menu.in_game_menu_state:
                 self.__handle_savings_menu()
-            
+
             pygame.display.update()
             self.__clock.tick(gf.FPS)
 
