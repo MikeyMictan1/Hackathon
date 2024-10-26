@@ -13,7 +13,7 @@ from BaseCodeFiles.globalfunctions import tile_size
 class Main:
     def __init__(self):
         pygame.init()
-        # initial setup
+        # initial setups
         self.__screen = pygame.display.set_mode((gf.screen_width, gf.screen_height))
         pygame.display.set_caption("Hackathon Title")
         self.__clock = pygame.time.Clock()
