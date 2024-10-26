@@ -122,7 +122,14 @@ class MazeLevel:
             return int(diffHours)
         #
         return 0
-
+    #
+    def updatePet (self):
+    #
+        diffHours = self.compareTime()
+        if (diffHours > 0):
+        #
+            a = 0
+        #
     #
     def run_level(self):
         self.__game_camera.draw_camera_offset()
