@@ -75,7 +75,7 @@ class ShoppingSystem:
     def checkout(self):
         self.calculateTotals()
         if self.totalCost <= self.player.currentBalance:
-            self.player.update_balance(-self.totalCost)
+            self.player.updateBalance(-self.totalCost)
             print("Items have been bought.")
         else:
             print("Not enough balance to buy these items.")

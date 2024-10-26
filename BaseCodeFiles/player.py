@@ -4,41 +4,59 @@ import os
 class Player:
     def __init__(self):
         self.weeklySalary = 100
-        self.prevMonth, self.prevWeek = self.load_prev_month_week()
+        self.inflation = 1.0175
+        self.bankInterest = 1.015
+        self.prevMonth, self.prevWeek = self.loadPrevMonthWeek()
         self.today = datetime.now()
         self.week = (self.today.strftime("%V")) #Week number via string eg 42 or 01
         self.month = int(self.today.strftime("%m")) #Month number via int eg 11
 
-        self.currentBalance = self.load_balance() #Loading in the balance
+        self.currentBalance = self.loadBalance() #Loading in the balance
+        self.currentRent = self.loadRent() #Loading in monthly rent
 
     #Storing balance system
-    def load_balance(self):
+    def loadBalance(self):
         if os.path.exists('balance.txt'):
             with open('balance.txt', 'r') as f:
                 return float(f.read().strip())
         else:
             return 100
 
-    def update_balance(self, amount):
+    def updateBalance(self, amount):
         self.currentBalance += amount
-        self.save_balance()
+        self.saveBalance()
+
+    def loadRent(self):
+        if os.path.exists('rent.txt'):
+            with open('rent.txt', 'r') as f:
+                return float(f.read().strip())
+        else:
+            return 40
+
+    def updateRent(self):
+        self.currentRent *= self.inflation
+        self.saveRent()
 
     #Comparing the previous month/week status to the current to check if the week/month has changed
-    def load_prev_month_week(self):
+    def loadPrevMonthWeek(self):
         if os.path.exists('prev_month_week.txt'):
             with open('prev_month_week.txt', 'r') as f:
-                prev_month, prev_week = f.read().strip().split(',')
-                return int(prev_month), prev_week.strip()
+                prevMonth, prevWeek = f.read().strip().split(',')
+                return int(prevMonth), prevWeek.strip()
         else:
             return 1, '1'
 
     #Saving data
-    def save_balance(self):
+    def saveBalance(self):
         with open('balance.txt', 'w') as f:
             f.write(str(self.currentBalance))
 
+    def saveRent(self):
+        with open('rent.txt', 'w') as f:
+            f.write(str(self.currentRent))
+
     #Saving data
-    def save_prev_month_week(self):
+    def savePrevMonthWeek(self):
         with open('prev_month_week.txt', 'w') as f:
             f.write(f"{self.month},{self.week}")
 
@@ -48,16 +66,19 @@ class Player:
             self.currentBalance += self.weeklySalary
 
         if self.month != self.prevMonth:
-            self.currentBalance *= 1.025
+            self.currentBalance *= self.bankInterest
+            self.currentRent *= self.inflation
+            self.currentBalance -= self.currentRent
 
         if self.month != self.prevMonth or self.week != self.prevWeek:
             self.prevMonth = self.month
             self.prevWeek = self.week
 
-        print("Current Balance: ", int(self.currentBalance))
+        print("Current Balance: ", self.currentBalance)
 
-        self.save_balance()
-        self.save_prev_month_week()
+        self.saveBalance()
+        self.saveRent()
+        self.savePrevMonthWeek()
 
 
 
