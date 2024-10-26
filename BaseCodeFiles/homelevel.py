@@ -8,6 +8,7 @@ from datetime import datetime
 import csv, os
 import player as pl
 
+
 class MazeLevel:
     """
     Description:
