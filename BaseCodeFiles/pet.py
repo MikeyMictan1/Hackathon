@@ -21,19 +21,15 @@ class Pet:
     #increments hunger by a certain amount
     def changeHunger(self, hungerChange ):
     #
-        self.maxHunger += hungerChange
+        self.hunger += hungerChange
     #
     def changeHappiness(self, happinessChange ):
     #
-        self.maxHappiness += happinessChange
+        self.happiness = self.happiness + happinessChange
     #
     def changeThirst(self, thirstChange ):
     #
-        self.maxThirst += thirstChange
-    #
-    def interestHappiness(self, happinessInterest ):
-    #
-        self.maxHappiness *= happinessInterest
+        self.thirst += thirstChange
     #
     def getname(self):
     #
@@ -61,11 +57,12 @@ class Pet:
         #
         if(flagBad):
         #
-            self.changeHappiness(self.happinessTick *numHours)
+            self.changeHappiness(self.happinessTick *numHours *-1)
         #
         elif(flagGood):
         #
-            self.changeHappiness(self.happinessTick *-1 *numHours)
+            self.changeHappiness(self.happinessTick *numHours)
+            print(self.happiness,"is happiness")
             if(self.happiness > self.maxHappiness):
             #
                 self.happiness = self.maxHappiness
@@ -81,8 +78,4 @@ class Pet:
     #
 #
 
-test = Pet()
-test.changeHunger(-22)
-print(test.hunger, " is hunger")
-test.updateHappiness(3)
-print(test.happiness)
+
