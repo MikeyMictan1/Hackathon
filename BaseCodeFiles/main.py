@@ -5,6 +5,7 @@ import homelevel as home_lvl
 from BaseCodeFiles import levellayout as lvl
 import gamechange as g_change
 import ingamemenus as ig_menu
+import savingsui as sav_menu
 #hi
 class Main:
     def __init__(self):
@@ -21,6 +22,7 @@ class Main:
         self.__home_level = home_lvl.MazeLevel(lvl.home)
         self.game_over = g_change.GameOver()
         self.in_game_menu = ig_menu.InGameMenu()
+        self.savings_menu = sav_menu.SavingsMenu()
 
     def run(self):
         while self.__in_game:
@@ -36,6 +38,7 @@ class Main:
                     print("in game menu opened?")
 
                 if event.type == pygame.KEYDOWN and (event.key == pygame.K_c):
+                    self.savings_menu.run_menu()
                     pass
 
             self.__screen.fill("black")
@@ -51,13 +54,28 @@ class Main:
             if self.in_game_menu.in_game_menu_state:  # if we open the in game menu by pressing ESC
                 self.__handle_in_game_menu()
 
+            # -- CHECKS IF IN SAVINGS MENU --
+            if self.savings_menu.in_game_menu_state:
+                self.__handle_savings_menu()
+            
             pygame.display.update()
             self.__clock.tick(gf.FPS)
+
+    def __handle_savings_menu(self):
+        """
+        Description:
+            Displays the controls menu on the screen.
+        """
+        self.savings_menu.display_menu()
 
     def __handle_in_game_menu(self):
         if self.in_game_menu.display_menu():
             # recreates all levels and returns us to the menu
             ...
+
+        if self.savings_menu.in_game_menu_state:
+            self.savings_menu.in_game_menu_state = False
+            self.savings_menu.escape_counter += 1
 
     def play_game(self):
         if self.__main_menu.play_pressed:
