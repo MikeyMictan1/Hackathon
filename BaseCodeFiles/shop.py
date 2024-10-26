@@ -16,14 +16,13 @@ class ShoppingSystem:
         self.happinessLevelIncrease = 0
         self.hungerLevelIncrease = 0
         self.thirstLevelIncrease = 0
+
+        #Available items to shop
         self.items = {
                 "Food": [
-                Item('Food', 'Breakfast', 5, 10),
-                Item('Food', 'Lunch', 5, 10),
-                Item('Food', 'Dinner', 5, 10),
-                Item('Food', 'Snacks', 5, 10),
-                Item('Food', 'Fruits', 5, 10),
-                Item('Food', 'Pastries', 5, 10)
+                Item('Food', 'Small', 5, 10),
+                Item('Food', 'Medium', 5, 10),
+                Item('Food', 'Large', 5, 10),
             ],
 
             "Clothes": [
@@ -48,6 +47,7 @@ class ShoppingSystem:
             ]
         }
 
+    #Items are added to cart if user inputs Y
     def addItemsToCart(self):
         for category, items in self.items.items():
             for item in items:
@@ -55,7 +55,7 @@ class ShoppingSystem:
                 if decision == 'Y':
                     self.cart.append(item)
 
-
+    #Calculates the total effect each item has on Chip (￣y▽,￣)╭
     def calculateTotals(self):
         for item in self.cart:
             if item.category == 'Food':
@@ -71,6 +71,7 @@ class ShoppingSystem:
         print("Happiness Level Increase: ", self.happinessLevelIncrease)
         print("Thirst Level Decrease: ", self.thirstLevelIncrease)
 
+    #Updates the bank account balance
     def checkout(self):
         self.calculateTotals()
         if self.totalCost <= self.player.currentBalance:
