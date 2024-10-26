@@ -92,7 +92,7 @@ class InGameMenu(g_change.GameChange):
 
     def display_menu(self):
         """
-        Description:
+        Descriptions:
             Displays the in-game menu on the screen. checks for button presses.
 
         Returns:
