@@ -57,7 +57,7 @@ class Main:
             # -- CHECKS IF IN SAVINGS MENU --
             if self.savings_menu.in_game_menu_state:
                 self.__handle_savings_menu()
-            
+
             pygame.display.update()
             self.__clock.tick(gf.FPS)
 

@@ -21,6 +21,7 @@ class SavingsMenu(InGameMenu):
     """
     def __init__(self):
         super().__init__()
+        ...
 
 
     def display_menu(self):
