@@ -1,3 +1,5 @@
+import math
+from datetime import datetime
 # a test
 # irene is here!!!!!!!!!!
 '''PROPER COMMENTING AAAAAAAA'''
@@ -11,8 +13,23 @@ print('THIS IS CRYSTAL DOES THIS WORK')
 print("This is crystal's actual laptop.")
 
 # CRYSTAL DO YOU SEE THIS??????
-
 # YES :DD
+time1 = datetime(2024,10,26,12,34)
+time2 = datetime(2024,10,26,14,32)
+def compareTime(lastTimeCheck,currentTime):
+    #
+    #currentTime = datetime.now()
+    difference = currentTime - lastTimeCheck
+    diffHours = (difference.total_seconds() / 3600)
+    print(diffHours)
+    if diffHours > 1:
+    #
+        lastTimeCheck = currentTime
+        return int(diffHours)
+    #
+    return 0
+#
+print(compareTime(time1,time2),"is the diff in hours")
 
 # mikey pygame changes ---
 super().__init__(groups)
