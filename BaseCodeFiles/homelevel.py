@@ -6,6 +6,7 @@ import camera as cam
 import pet as pet
 from datetime import datetime
 import csv, os
+import player as pl
 
 class MazeLevel:
     """
@@ -44,7 +45,8 @@ class MazeLevel:
         self.__sword_sprites = pygame.sprite.Group()
         self.__wall_sprites = pygame.sprite.Group()
         self.__game_camera = cam.GameCamera()
-
+        self.lastTimeCheck = datetime.now() # change this later becuase it should be initialised to what is in the file if there is one
+        self.player = pl.Player()
         # maze creation
         self.create_pygame_home(layout_list)
 
@@ -110,7 +112,7 @@ class MazeLevel:
             self.chip = pet.Pet(position, [self.__game_camera], self.__wall_sprites)
 
 
-    def compareTime (self):
+    def compareTimeHours (self):
     #
         currentTime = datetime.now()
         difference = currentTime - self.lastTimeCheck
@@ -123,18 +125,19 @@ class MazeLevel:
         #
         return 0
     #
-    def updatePet (self):
+    def updatePet (self, chip):
     #
-        diffHours = self.compareTime()
+        diffHours = self.compareTimeHours()
         if (diffHours > 0):
         #
-            a = 0
+            chip.updatePet(diffHours)
         #
     #
     def run_level(self):
         self.__game_camera.draw_camera_offset()
         self.__game_camera.update()
         self.update_time()
+        self.updatePet(self.chip)
 
     # Functions that deal with time every day
     def update_time(self):

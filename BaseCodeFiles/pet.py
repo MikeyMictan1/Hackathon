@@ -34,12 +34,17 @@ class Pet(pygame.sprite.Sprite):
     #
         self.dead = False
         self.name = "chip"
-        self.maxHunger,self.hunger = 100,100
-        self.maxHappiness, self.happiness = 100,100
-        self.maxThirst, self.thirst = 100,100
+        self.maxHunger = 100
+        self.hunger = 100
+        self.max_happiness = 100
+        self.happiness = 100
+        self.maxThirst = 100
+        self.thirst = 100
         self.highenough = 80
         self.tooLow = 20
-        self.happinessTick = -4
+        self.happinessTick = -2
+        self.hungerTick = -3
+        self.thirstTick = -1
     #
     #increments hunger by a certain amount
     def changeHunger(self, hungerChange ):
@@ -96,11 +101,20 @@ class Pet(pygame.sprite.Sprite):
         #
     #
     def checkDead(self):
+        if self.hunger <= 0 or self.happiness <= 0 or self.thirst <= 0:
+            return True
+
+        else:
+            return False
+
+
+
+    def updatePet(self,numhours):
     #
-        if(self.hunger <= 0 or self.happiness <= 0 or self.thirst <= 0):
-        #
-            dead = True
-        #
+        self.changeHunger(self.hungerTick * numhours)
+        self.changeThirst(self.thirstTick * numhours)
+        self.updateHappiness(numhours)
+    #
     # MIKEY PYGAME STUFF GO AWAY ADRIAN EWW C-CODER--------
     def update(self):
         self.hud()
@@ -116,6 +130,9 @@ class Pet(pygame.sprite.Sprite):
         self.thirst_text= self.general_font.render(f"Thirst:       {self.thirst}", True, (255,255,255))
         self.__screen.blit(self.thirst_text,(gf.screen_width // 15, gf.screen_height // 6.5))
 
+        self.home_text = gf.smaller_title_font.render(f"Chip's Humble Abode", True, (255, 255, 255))
+        self.__screen.blit(self.home_text, (gf.img_centre(self.home_text)[0], gf.screen_height // 20))
+
     def animation(self):
         self.__frame += self.__frame_speed
         if self.__frame >= len(self.__animation_dict["idle"]):  # could be any folder, but took the first one
@@ -124,9 +141,9 @@ class Pet(pygame.sprite.Sprite):
         self.image = self.__animation_dict[self.__state][int(self.__frame)]
         self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
 
-
-#test = Pet()
-#test.changeHunger(-22)
-#print(test.hunger, " is hunger")
-#test.updateHappiness(3)
-#print(test.happiness)
+'''test = Pet()
+test.changeHunger(-22)
+print(test.hunger, " is hunger")
+test.updatePet(3)
+print(test.happiness)
+print(test.hunger, " is hunger 2")'''
