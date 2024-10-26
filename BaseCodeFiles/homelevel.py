@@ -110,6 +110,27 @@ class MazeLevel:
             self.chip = pet.Pet(position, [self.__game_camera], self.__wall_sprites)
 
 
+    def compareTime (self):
+    #
+        currentTime = datetime.now()
+        difference = currentTime - self.lastTimeCheck
+        diffHours = (difference.total_seconds() / 3600)
+        print(diffHours)
+        if diffHours > 1:
+        #
+            self.lastTimeCheck = currentTime
+            return int(diffHours)
+        #
+        return 0
+    #
+    def updatePet (self):
+    #
+        diffHours = self.compareTime()
+        if (diffHours > 0):
+        #
+            a = 0
+        #
+    #
     def run_level(self):
         self.__game_camera.draw_camera_offset()
         self.__game_camera.update()
