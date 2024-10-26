@@ -20,6 +20,10 @@ class Player:
         else:
             return 100
 
+    def update_balance(self, amount):
+        self.currentBalance += amount
+        self.save_balance()
+
     def load_prev_month_week(self):
         if os.path.exists('prev_month_week.txt'):
             with open('prev_month_week.txt', 'r') as f:
