@@ -13,18 +13,22 @@ class Pet(pygame.sprite.Sprite):
         super().__init__(groups)
         self.__wall_sprites = wall_sprites
         self.__position = pos
-        self.__rect_width = 200
-        self.__rect_height = 200
-        self.__character_width = 200
-        self.__character_height = 160
+        self.__rect_width = 100
+        self.__rect_height = 100
         self.__screen = pygame.display.get_surface()
-        self.image = pygame.image.load('../Graphics/pet/pet.png')
-        self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
-        self.rect = self.image.get_rect(topleft=pos)
 
         # hud infos
         self.__controls_font = pygame.font.Font("../Fonts/Pixel.ttf", 30)
 
+        # animations
+        self.__frame = 0
+        self.__frame_speed = 0.1
+        self.__animation_dict = {"idle": []}
+        self.__animation_dict = gf.import_graphics_dict("pet", self.__animation_dict, "../Graphics")
+        self.__state = "idle"
+        self.image = self.__animation_dict[self.__state][self.__frame]
+        self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
+        self.rect = self.image.get_rect(topleft=pos)
         # mikey pygame changes ---
     #
         self.dead = False
@@ -99,6 +103,7 @@ class Pet(pygame.sprite.Sprite):
     # MIKEY PYGAME STUFF GO AWAY ADRIAN EWW C-CODER--------
     def update(self):
         self.hud()
+        self.animation()
 
     def hud(self):
         self.happiness_text = self.__controls_font.render(f"Happiness: {self.happiness}", True, (255,255,255))
@@ -110,6 +115,12 @@ class Pet(pygame.sprite.Sprite):
         self.thirst_text= self.__controls_font.render(f"Thirst: {self.thirst}", True, (255,255,255))
         self.__screen.blit(self.thirst_text,(gf.screen_width // 15, gf.screen_height // 6.5))
 
+    def animation(self):
+        self.__frame += self.__frame_speed
+        if self.__frame >= len(self.__animation_dict["idle"]):  # could be any folder, but took the first one
+            self.__frame = 0
+
+        self.image = self.__animation_dict[self.__state][int(self.__frame)]
 
 #test = Pet()
 #test.changeHunger(-22)

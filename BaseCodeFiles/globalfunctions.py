@@ -13,6 +13,8 @@ pygame.init()
 
 # fonts and colours
 font = pygame.font.Font("../Fonts/Pixel.ttf", 100)
+title_font = pygame.font.Font("../Fonts/sheepish.ttf", 100)
+general_font = pygame.font.Font("../Fonts/Primer.otf", 100)
 white = (255, 255, 255)
 # --- GAME SETTINGS SETUP ---
 
