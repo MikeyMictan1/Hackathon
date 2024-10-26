@@ -44,3 +44,12 @@ self.image = pygame.image.load('../Graphics/pet/pet.png')
 self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
 self.rect = self.image.get_rect(topleft=pos)
 # mikey pygame changes ---
+
+
+self.hunger -= 1
+
+
+def check_game_over(self, home_lvl):
+    if home_lvl.chip.happiness <= 0 or home_lvl.chip.hunger <= 0 or home_lvl.chip.thirst <= 0:
+        print("CHIPS DEAD")
+        self.game_over.run()
