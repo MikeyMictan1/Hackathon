@@ -94,8 +94,8 @@ class Pet(pygame.sprite.Sprite):
     #
 #
 
-test = Pet()
-test.changeHunger(-22)
-print(test.hunger, " is hunger")
-test.updateHappiness(3)
-print(test.happiness)
+#test = Pet()
+#test.changeHunger(-22)
+#print(test.hunger, " is hunger")
+#test.updateHappiness(3)
+#print(test.happiness)
