@@ -1,5 +1,6 @@
 import pygame
 import datetime
+import globalfunctions as gf
 '''the things the pet should be able to do and the stats it should have:
 hunger, happiness, thirst
 
@@ -20,6 +21,10 @@ class Pet(pygame.sprite.Sprite):
         self.image = pygame.image.load('../Graphics/pet/pet.png')
         self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
         self.rect = self.image.get_rect(topleft=pos)
+
+        # hud infos
+        self.__controls_font = pygame.font.Font("../Fonts/Pixel.ttf", 30)
+
         # mikey pygame changes ---
     #
         self.dead = False
@@ -91,8 +96,18 @@ class Pet(pygame.sprite.Sprite):
         #
             dead = True
         #
-    #
-#
+    # MIKEY PYGAME STUFF GO AWAY ADRIAN EWW C-CODER--------
+    def update(self):
+        self.hud()
+
+    def hud(self):
+        self.happiness_text = self.__controls_font.render(f"Happiness: {self.happiness}", True, (255,255,255))
+        self.__screen.blit(self.happiness_text,(gf.screen_width // 10, gf.screen_height // 10))
+
+        self.hunger_text = self.__controls_font.render(f"Hunger: {self.hunger}", True, (255,255,255))
+        self.__screen.blit(self.hunger_text,(gf.screen_width // 10, gf.screen_height // 20))
+
+        self.hunger -=1
 
 #test = Pet()
 #test.changeHunger(-22)
