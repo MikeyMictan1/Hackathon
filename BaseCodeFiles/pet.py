@@ -5,9 +5,22 @@ hunger, happiness, thirst
 
 '''
 
-class Pet:
+class Pet(pygame.sprite.Sprite):
 #
-    def __init__(self):
+    def __init__(self, pos, groups, wall_sprites):
+        # mikey pygame changes ---
+        super().__init__(groups)
+        self.__wall_sprites = wall_sprites
+        self.__position = pos
+        self.__rect_width = 200
+        self.__rect_height = 200
+        self.__character_width = 200
+        self.__character_height = 160
+        self.__screen = pygame.display.get_surface()
+        self.image = pygame.image.load('../Graphics/pet/pet.png')
+        self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
+        self.rect = self.image.get_rect(topleft=pos)
+        # mikey pygame changes ---
     #
         self.dead = False
         self.name = "chip"
