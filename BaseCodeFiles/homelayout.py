@@ -56,7 +56,7 @@ class WallHidden(pygame.sprite.Sprite):
         """
         super().__init__(groups)
         self.image = pygame.image.load(
-            f"../Graphics/wall/crackedbrickhidden.png").convert_alpha()  # making a hidden wall surface
+            f"../Graphics/wall/floor.PNG").convert_alpha()  # making a hidden wall surface
         self.image = pygame.transform.scale(self.image, (150, 150))
         self.rect = self.image.get_rect(topleft=pos)
 
@@ -84,8 +84,7 @@ class Floor(pygame.sprite.Sprite):
             groups (list): the sprite groups that the floor class belongs to
         """
         super().__init__(groups)
-        self.images = os.listdir("../Graphics/floor")
         self.image = pygame.image.load(
-            f"../Graphics/floor/{random.choice(self.images)}").convert_alpha()  # making a floor surface
+            f"../Graphics/floor/wall.png").convert_alpha()  # making a floor surface
         self.image = pygame.transform.scale(self.image, (150, 150))
         self.rect = self.image.get_rect(topleft=pos)
