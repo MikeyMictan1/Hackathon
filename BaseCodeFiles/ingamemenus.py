@@ -33,13 +33,15 @@ class InGameMenu(g_change.GameChange):
         __in_game_menu_sound (pygame.mixer.Sound): Sound to be played whenever the in-game menu is opened/closed
         escape_counter (int): The number of times a button that opens the in game menu has been pressed
     """
-    def __init__(self):
+    def __init__(self, player, chip):
         """
         Description:
             Initialisation function for the in game menu class.
         """
         super().__init__()
         self.in_game_menu_state = False
+        self.player = player
+        self.chip = chip
 
         # --- GRAPHICS ---
         self.__in_game_menu_graphics_dict = {"continue": [], "overlay": [], "buy": []}
@@ -60,6 +62,7 @@ class InGameMenu(g_change.GameChange):
 
         self.buy_txt_white = self.__in_game_menu_graphics_dict["buy"][0]
         self.buy_txt_yellow = self.__in_game_menu_graphics_dict["buy"][1]
+
         # buying buttons
         self.buy_food_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 3)
         self.buy_food_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_food_pos)
@@ -78,6 +81,7 @@ class InGameMenu(g_change.GameChange):
         self.decorations_price_txt = gf.medium_title_font.render("Price: 5", 1, gf.white)
 
         self.__in_game_menu_txt = gf.title_font.render("SHOP", 1, gf.white)
+        self.balance_txt = gf.medium_title_font.render("Balance", 1, gf.white)
         # --- GRAPHICS ---
 
         self.escape_counter = 0
@@ -141,34 +145,3 @@ class InGameMenu(g_change.GameChange):
         if self.__quit_option.pressed:  # quits the game if "quit" is pressed
             pygame.quit()
             sys.exit()
-
-
-class ControlsMenu(InGameMenu):
-    """
-    Description:
-        Class for the controls menu UI that can be opened at any time while the player is in a level.
-
-    Inherits:
-        InGameMenu: inherits from the in game menu for certain attributes such as menu_overlay, escape_counter and
-        in_game_menu_state
-
-    Attributes:
-        __control_set_image (pygame.Surface): Image containing all the controls of the game
-    """
-    def __init__(self):
-        super().__init__()
-        self.__control_set_image = pygame.image.load("../Graphics/controls/control_set.png")
-        self.__control_set_image = pygame.transform.scale(self.__control_set_image, (500, 600))
-
-    def display_menu(self):
-        """
-        Description:
-            Displays the controls menu on the screen.
-        """
-        # makes sure the menu will open and close after open/close buttons are pressed
-        if self.escape_counter % 2 == 0:
-            self.in_game_menu_state = False
-
-        self.screen.blit(self.menu_overlay, (gf.img_centre(self.menu_overlay)[0], gf.img_centre(self.menu_overlay)[1]))
-        self.screen.blit(self.__control_set_image,
-                         (gf.img_centre(self.__control_set_image)[0], gf.img_centre(self.__control_set_image)[1]))
