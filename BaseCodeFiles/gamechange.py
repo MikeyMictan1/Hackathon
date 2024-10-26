@@ -130,7 +130,7 @@ class GameOver(GameChange):
         # other text
         self.__game_over_txt = gf.title_font.render("Chip Died! xD", 1, gf.white)
 
-
+#
     def run(self):
         while self.game_over_state:  # while we are in the game over menu
             self.event_quit()
