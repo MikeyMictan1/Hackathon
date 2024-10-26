@@ -33,13 +33,15 @@ class InGameMenu(g_change.GameChange):
         __in_game_menu_sound (pygame.mixer.Sound): Sound to be played whenever the in-game menu is opened/closed
         escape_counter (int): The number of times a button that opens the in game menu has been pressed
     """
-    def __init__(self):
+    def __init__(self, player, chip):
         """
         Description:
             Initialisation function for the in game menu class.
         """
         super().__init__()
         self.in_game_menu_state = False
+        self.player = player
+        self.chip = chip
 
         # --- GRAPHICS ---
         self.__in_game_menu_graphics_dict = {"continue": [], "overlay": [], "buy": []}

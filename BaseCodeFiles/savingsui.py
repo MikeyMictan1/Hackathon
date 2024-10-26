@@ -19,10 +19,10 @@ class SavingsMenu(InGameMenu):
     Attributes:
         __control_set_image (pygame.Surface): Image containing all the controls of the game
     """
-    def __init__(self):
-        super().__init__()
-        ...
-
+    def __init__(self,player, chip):
+        super().__init__(player, chip)
+        self.player = player
+        self.chip = chip
 
     def display_menu(self):
         """
