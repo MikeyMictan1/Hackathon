@@ -34,9 +34,12 @@ class Pet(pygame.sprite.Sprite):
     #
         self.dead = False
         self.name = "chip"
-        self.maxHunger,self.hunger = 100,100
-        self.maxHappiness, self.happiness = 100,100
-        self.maxThirst, self.thirst = 100,100
+        self.maxHunger = 100
+        self.hunger = 100
+        self.max_happiness = 100
+        self.happiness = 100
+        self.maxThirst = 100
+        self.thirst = 100
         self.highenough = 80
         self.tooLow = 20
         self.happinessTick = -2
@@ -137,7 +140,6 @@ class Pet(pygame.sprite.Sprite):
 
         self.image = self.__animation_dict[self.__state][int(self.__frame)]
         self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
-        self.hunger -= 1
 
 '''test = Pet()
 test.changeHunger(-22)

@@ -4,7 +4,7 @@ import mainmenu as mn_menu
 import homelevel as home_lvl
 from BaseCodeFiles import levellayout as lvl
 import gamechange as g_change
-
+import ingamemenus as ig_menu
 #hi
 class Main:
     def __init__(self):
@@ -20,6 +20,7 @@ class Main:
         # level initialisation
         self.__home_level = home_lvl.MazeLevel(lvl.home)
         self.game_over = g_change.GameOver()
+        self.in_game_menu = ig_menu.InGameMenu()
 
     def run(self):
         while self.__in_game:
@@ -31,7 +32,8 @@ class Main:
 
                 # in-game menu
                 if event.type == pygame.KEYDOWN and (event.key == pygame.K_TAB or event.key == pygame.K_ESCAPE):
-                    pass
+                    self.in_game_menu.run_menu()
+                    print("in game menu opened?")
 
                 if event.type == pygame.KEYDOWN and (event.key == pygame.K_c):
                     pass
@@ -45,9 +47,17 @@ class Main:
             if self.__main_menu.in_menu:
                 self.__main_menu.menu()
 
+            # -- CHECKS IF IN SHOP MENU ---
+            if self.in_game_menu.in_game_menu_state:  # if we open the in game menu by pressing ESC
+                self.__handle_in_game_menu()
 
             pygame.display.update()
             self.__clock.tick(gf.FPS)
+
+    def __handle_in_game_menu(self):
+        if self.in_game_menu.display_menu():
+            # recreates all levels and returns us to the menu
+            ...
 
     def play_game(self):
         if self.__main_menu.play_pressed:
