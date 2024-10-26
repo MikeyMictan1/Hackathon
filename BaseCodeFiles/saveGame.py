@@ -22,7 +22,7 @@ class GameData:
         outTime = outTime + "-" + currentTime[17:]
         return outTime
 
-    def saveGame(self, happiness, hunger, thirst, savingsAccount, money, ownedItems):
+    def setGameData(self, happiness, hunger, thirst, savingsAccount, money, ownedItems):
         self.lastTimeRecorded = self.getCurrentTime()
         data = {
             'petHappiness': [happiness],
@@ -56,5 +56,5 @@ class GameData:
 
 
 test = GameData()
-test.saveGame(100,100,100,0,0,[0,0])
+test.setGameData(100,100,100,0,0,[0,0])
 print(test.getGameData())
