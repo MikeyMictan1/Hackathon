@@ -142,7 +142,7 @@ class GameOver(GameChange):
         self.__game_over_txt = self.game_change_font.render("GAME OVER!", 1, gf.white)
 
 
-    def run(self, points: float):
+    def run(self):
         """
         Description:
             Runs the game over menu, checking for button presses and displaying the number of points the player
@@ -151,8 +151,6 @@ class GameOver(GameChange):
         Parameters:
             points (float): The number of points the character is on once the game over menu is reached.
         """
-        self.__end_points = int(points)
-        self.__score_txt = self.game_change_points_font.render(f"POINTS BEFORE DEATH:{self.__end_points}", 1, gf.white)
 
         while self.game_over_state:  # while we are in the game over menu
             self.event_quit()
@@ -160,7 +158,6 @@ class GameOver(GameChange):
             # game over visuals
             self.screen.blit(self.__background, (0, 0))
             self.screen.blit(self.__game_over_txt, (gf.img_centre(self.__game_over_txt)[0], gf.screen_height // 20))
-            self.screen.blit(self.__score_txt, (gf.img_centre(self.__score_txt)[0], gf.screen_height // 4))
 
             # animations for the character icon in the middle of the game over screen
             self.frame += self.frame_speed

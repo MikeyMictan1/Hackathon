@@ -98,12 +98,13 @@ class Pet(pygame.sprite.Sprite):
         #
     #
     def checkDead(self):
-    #
-        if(self.hunger <= 0 or self.happiness <= 0 or self.thirst <= 0):
-        #
-            dead = True
-        #
-    #
+        if self.hunger <= 0 or self.happiness <= 0 or self.thirst <= 0:
+            return True
+
+        else:
+            return False
+
+
 
     def updatePet(self,numhours):
     #
@@ -136,7 +137,7 @@ class Pet(pygame.sprite.Sprite):
 
         self.image = self.__animation_dict[self.__state][int(self.__frame)]
         self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
-
+        self.hunger -= 1
 
 '''test = Pet()
 test.changeHunger(-22)

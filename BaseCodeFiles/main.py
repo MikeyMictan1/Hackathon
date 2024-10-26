@@ -53,10 +53,14 @@ class Main:
         if self.__main_menu.play_pressed:
             self.__main_menu.in_menu = False
             self.__home_level.run_level()
+            self.check_game_over(self.__home_level)
             self.__main_menu.game_on = False
 
-    def check_game_over(self):
-        self.game_over.run(...)
+
+    def check_game_over(self, home_lvl):
+        if home_lvl.chip.happiness <= 0 or home_lvl.chip.hunger <= 0 or home_lvl.chip.thirst <= 0:
+            print("CHIPS DEAD")
+            self.game_over.run()
 
 main = Main()
 main.run()
