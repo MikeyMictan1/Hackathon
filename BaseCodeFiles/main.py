@@ -6,6 +6,9 @@ from BaseCodeFiles import levellayout as lvl
 import gamechange as g_change
 import ingamemenus as ig_menu
 import savingsui as sav_menu
+from BaseCodeFiles.globalfunctions import tile_size
+
+
 #hi
 class Main:
     def __init__(self):
@@ -23,6 +26,10 @@ class Main:
         self.game_over = g_change.GameOver()
         self.in_game_menu = ig_menu.InGameMenu(self.__home_level.player, self.__home_level.chip)
         self.savings_menu = sav_menu.SavingsMenu(self.__home_level.player, self.__home_level.chip)
+
+        # decor stuffs
+        self.decorations_img = pygame.image.load("../Graphics/ingamemenu/decor_pic.PNG")
+        self.decorations_img = pygame.transform.scale(self.decorations_img, (150, 150))
 
     def run(self):
         while self.__in_game:
@@ -58,6 +65,8 @@ class Main:
             if self.savings_menu.in_game_menu_state:
                 self.__handle_savings_menu()
 
+            self.check_decor()
+            print("CHECKING DECOR HMMMMMMMM INTERESINT I SEE")
             pygame.display.update()
             self.__clock.tick(gf.FPS)
 
@@ -86,9 +95,13 @@ class Main:
 
 
     def check_game_over(self, home_lvl):
-        if home_lvl.chip.happiness <= 0 or home_lvl.chip.hunger <= 0 or home_lvl.chip.thirst <= 0:
+        if home_lvl.chip.happiness <= 0 or home_lvl.chip.hunger <= 0 or home_lvl.chip.thirst <= 0 or home_lvl.player.currentBalance <= 0:
             print("CHIPS DEAD")
             self.game_over.run()
+
+    def check_decor(self):
+        if self.in_game_menu.decor_bought:
+            self.__screen.blit(self.decorations_img, (tile_size*7, tile_size))
 
 main = Main()
 main.run()
