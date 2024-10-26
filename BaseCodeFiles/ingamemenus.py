@@ -62,6 +62,7 @@ class InGameMenu(g_change.GameChange):
 
         self.buy_txt_white = self.__in_game_menu_graphics_dict["buy"][0]
         self.buy_txt_yellow = self.__in_game_menu_graphics_dict["buy"][1]
+
         # buying buttons
         self.buy_food_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 3)
         self.buy_food_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_food_pos)
@@ -80,6 +81,7 @@ class InGameMenu(g_change.GameChange):
         self.decorations_price_txt = gf.medium_title_font.render("Price: 5", 1, gf.white)
 
         self.__in_game_menu_txt = gf.title_font.render("SHOP", 1, gf.white)
+        self.balance_txt = gf.medium_title_font.render("Balance", 1, gf.white)
         # --- GRAPHICS ---
 
         self.escape_counter = 0
