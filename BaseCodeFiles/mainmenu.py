@@ -17,9 +17,9 @@ class MainMenu:
             Initialisation function for the main menu class.
         """
         self.__quit_option = None
-        self.__first_button = None
+        self.__play_button = None
         self.in_menu = True  # in the menu?
-        self.first_pressed = False  # button1 option pressed?
+        self.play_pressed = False  # button1 option pressed?
 
         # loading logo graphics
         self.__screen = pygame.display.set_mode((gf.screen_width, gf.screen_height))
@@ -41,7 +41,7 @@ class MainMenu:
         self.__quit_button_yellow = self.__menu_graphics_dict["quit"][1]
         self.__quit_button_pos = (gf.screen_width // 10, gf.screen_height // 1.5)
 
-    def first_button_pressed(self):
+    def play_button_pressed(self):
         """
         Description:
             whatever we want to happen when the first button gets pressed
@@ -76,13 +76,13 @@ class MainMenu:
             Draws menu buttons on the screen, and checks if they have been pressed.
         """
         # button1 menu option
-        self.__first_button = btn.OptionPress(self.__first_button_white, self.__first_button_yellow, self.__first_button_pos)
-        self.__first_button.draw(pygame.display.get_surface())
+        self.__play_button = btn.OptionPress(self.__first_button_white, self.__first_button_yellow, self.__first_button_pos)
+        self.__play_button.draw(pygame.display.get_surface())
 
         # first button option
-        if self.__first_button.pressed:  # plays the game if "button1" pressed
-            self.first_button_pressed()
-            self.first_pressed = True
+        if self.__play_button.pressed:  # plays the game if "button1" pressed
+            self.play_button_pressed()
+            self.play_pressed = True
 
         # quit button option
         self.__quit_option = btn.OptionPress(self.__quit_button_white, self.__quit_button_yellow, self.__quit_button_pos)
