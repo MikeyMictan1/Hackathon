@@ -14,7 +14,7 @@ class SavingsAcc():
     #given what time it is, can the user retrieve their money
     def isDone (self,currentTime):
     #
-        if( self.endTime - currentTime > timedelta(0)):
+        if( self.endTime - currentTime <= timedelta(0)):
         #
             return True
         #
