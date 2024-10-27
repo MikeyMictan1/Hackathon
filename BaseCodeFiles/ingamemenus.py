@@ -5,6 +5,8 @@ import gamechange as g_change
 import globalfunctions as gf
 import buttons as btn
 import time
+from Tips import Tips
+import random
 
 class InGameMenu(g_change.GameChange):
     """
@@ -43,6 +45,10 @@ class InGameMenu(g_change.GameChange):
         self.player = player
         self.chip = chip
         self.decor_bought = False
+        self.tip = Tips()
+
+        self.choice = random.choice(list(self.tip.tips))
+        self.shop_subtitle_txt = gf.smaller_title_font.render(str(self.choice), 1, gf.white)
 
         # --- GRAPHICS ---
         self.__in_game_menu_graphics_dict = {"continue": [], "overlay": [], "buy": []}
@@ -74,7 +80,6 @@ class InGameMenu(g_change.GameChange):
         self.decorations_img = pygame.image.load("../Graphics/ingamemenu/decor_pic.PNG")
         self.decorations_img = pygame.transform.scale(self.decorations_img, (80, 80))
 
-
         self.buy_food_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 3)
         self.buy_food_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_food_pos)
         self.food_price_txt = gf.medium_title_font.render("Price: 5", 1, gf.white)
@@ -103,6 +108,7 @@ class InGameMenu(g_change.GameChange):
             sets up the menu - sets its state to "true", and plays the menu open sound
         """
         self.escape_counter += 1
+        self.choice = random.choice(list(self.tip.tips))
         self.in_game_menu_state = True
 
     def display_menu(self):
@@ -113,12 +119,28 @@ class InGameMenu(g_change.GameChange):
         Returns:
             True: returns true if the menu button was pressed
         """
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_TAB:
+                    self.run_menu()  # This opens the menu
+                    # Update the tip every time TAB is pressed
+                    self.choice = random.choice(list(self.tip.tips))
+                    self.shop_subtitle_txt = gf.smaller_title_font.render(str(self.choice), 1, gf.white)
+
+                if event.key == pygame.K_r and self.in_game_menu_state:
+                    self.choice = random.choice(list(self.tip.tips))
+                    self.shop_subtitle_txt = gf.smaller_title_font.render(str(self.choice), 1, gf.white)
+
         if self.escape_counter % 2 == 0:  # makes sure esc will open AND close the in game menu
             self.in_game_menu_state = False
+
         self.balance_num = gf.medium_title_font.render(f"   {self.player.currentBalance:.2f}cc", 1, gf.white)
 
         self.screen.blit(self.menu_overlay, (gf.img_centre(self.menu_overlay)[0], gf.img_centre(self.menu_overlay)[1]))
         self.screen.blit(self.__in_game_menu_txt, (gf.img_centre(self.__in_game_menu_txt)[0], gf.screen_height // 30))
+
+        self.screen.blit(self.shop_subtitle_txt, (gf.img_centre(self.shop_subtitle_txt)[0], gf.screen_height // 4))
+
         self.screen.blit(self.balance_txt, (gf.screen_width// 1.4, gf.screen_height // 30))
         self.screen.blit(self.balance_num, (gf.screen_width // 1.4, gf.screen_height // 10))
 
