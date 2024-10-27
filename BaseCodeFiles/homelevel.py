@@ -1,5 +1,5 @@
 import pygame
-
+import GameData as GameData
 import homelayout as mz_lay
 import globalfunctions as gf
 import camera as cam
@@ -36,6 +36,7 @@ class MazeLevel:
         self.__wall_sprites = pygame.sprite.Group()
         self.__game_camera = cam.GameCamera()
         self.lastTimeCheck = datetime.now() # change this later becuase it should be initialised to what is in the file if there is one
+        self.lastTimeCheckHours = datetime.now()# also need to change this later to time saved in file
         self.player = pl.Player()
         # maze creation
         self.create_pygame_home(layout_list)
@@ -43,6 +44,12 @@ class MazeLevel:
         # other setup
         self.is_active = True
         self.level_type = "normal"
+        self.gameData = GameData.GameData()
+        self.petHappiness, self.petHunger, self.petThirst, self.playerMoney, self.playerSavingsAccount, self.lastTimeRecorded, self.ownedItems = self.gameData.getGameData()
+        self.numbers_list = [float(num) for num in self.lastTimeRecorded.split('-')]
+        self.numbers_list = [int(num) for num in self.numbers_list]
+        self.lastTimeRecorded = datetime(self.numbers_list[0], self.numbers_list[1], self.numbers_list[2], self.numbers_list[3], self.numbers_list[4], self.numbers_list[5])
+        self.lastTimeCheck = self.lastTimeRecorded
 
         self.csv_file = 'last_run_date.csv'
 
@@ -116,6 +123,10 @@ class MazeLevel:
         #
         return 0
     #
+    def compareTimeDays(self):
+    #
+        currentTime = datetime.now()
+
     def updatePet (self, chip):
     #
         diffHours = self.compareTimeHours()
