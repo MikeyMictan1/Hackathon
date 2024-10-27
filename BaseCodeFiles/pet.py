@@ -1,6 +1,7 @@
 import pygame
 import datetime
 import globalfunctions as gf
+from dataExtractor import DataHandler
 '''the things the pet should be able to do and the stats it should have:
 hunger, happiness, thirst
 
@@ -17,6 +18,7 @@ class Pet(pygame.sprite.Sprite):
         self.__rect_height = 200
         self.__screen = pygame.display.get_surface()
         self.outfitted = False
+        self.data = DataHandler()
 
         # hud infos
         self.__controls_font = pygame.font.Font("../Fonts/Pixel.ttf", 30)
@@ -56,14 +58,15 @@ class Pet(pygame.sprite.Sprite):
     #
         self.dead = False
         self.name = "chip"
-        self.maxHunger,self.hunger = 100,100#hunger
-        self.maxHappiness, self.happiness = 100,100#happiness
-        self.maxThirst, self.thirst = 100,100#thirsty
+        self.maxHunger,self.hunger = 100,int(self.data.read_value('hungerLevel'))#hunger
+        self.maxHappiness, self.happiness = 100,int(self.data.read_value('happinessLevel'))#happiness
+        self.maxThirst, self.thirst = 100,int(self.data.read_value('thirstLevel'))#thirsty
         self.highenough = 80
         self.tooLow = 20
         self.happinessTick = -2
         self.hungerTick = -3
         self.thirstTick = -1
+
     #
     #increments hunger by a certain amount
     def changeHunger(self, hungerChange ):
@@ -75,6 +78,7 @@ class Pet(pygame.sprite.Sprite):
         if (self.hunger > self.maxHunger):
         #
             self.hunger = self.maxHunger
+        self.data.replace_value('hungerLevel', self.hunger)
         #
     #
     def setstats(self,petHappiness, petHunger, petThirst):
@@ -85,7 +89,9 @@ class Pet(pygame.sprite.Sprite):
     #
     def changeHappiness(self, happinessChange ):
     #
-        self.happiness += happinessChange
+        self.happiness -= happinessChange
+        self.data.replace_value('happinessLevel', self.happiness)
+
 
     #
     def setMax(self):
@@ -111,6 +117,7 @@ class Pet(pygame.sprite.Sprite):
         if (self.thirst > self.maxThirst):
         #
             self.thirst = self.maxThirst
+        self.data.replace_value('thirstLevel', self.thirst)
         #
     #
     def interestHappiness(self, happinessInterest ):
@@ -172,6 +179,16 @@ class Pet(pygame.sprite.Sprite):
             print(self.hunger, self.happiness,"thirst is",self.thirst)
         #
     #
+
+    def resetStats(self):
+        self.data.replace_value('hungerLevel', 100)
+        self.data.replace_value('happinessLevel', 100)
+        self.data.replace_value('thirstLevel', 100)
+        self.data.replace_value('currentBalance', 100)
+        self.data.replace_value('currentRent', 40)
+        self.data.replace_value('savingsBalance', 50)
+
+
     # MIKEY PYGAME STUFF GO AWAY ADRIAN EWW C-CODER--------
     def update(self):
         self.hud()
