@@ -66,6 +66,8 @@ class SavingsMenu(InGameMenu):
 
         self.__in_game_menu_txt = gf.medium_title_font.render("Savings' Account Menu", 1, gf.white)
         self.balance_txt = gf.medium_title_font.render("Balance", 1, gf.white)
+
+        self.savings_txt = gf.medium_title_font.render("Savings", 1, gf.white)
         # --- GRAPHICS ---
 
         self.escape_counter = 0
@@ -89,13 +91,17 @@ class SavingsMenu(InGameMenu):
 
         if self.escape_counter % 2 == 0:  # makes sure esc will open AND close the in game menu
             self.in_game_menu_state = False
-        self.balance_num = gf.medium_title_font.render(f"{self.player.currentBalance:.2f}", 1, gf.white)
+        self.balance_num = gf.medium_title_font.render(f"{self.player.currentBalance:.2f}cc", 1, gf.white)
+        self.savings_num = gf.medium_title_font.render(f"{self.player.savings_balance:.2f}cc", 1, gf.white)
 
         self.screen.blit(self.menu_overlay, (gf.img_centre(self.menu_overlay)[0], gf.img_centre(self.menu_overlay)[1]))
         self.screen.blit(self.__in_game_menu_txt, (gf.img_centre(self.__in_game_menu_txt)[0]-150, gf.screen_height // 30))
 
         self.screen.blit(self.balance_txt, (gf.screen_width// 1.4, gf.screen_height // 30))
         self.screen.blit(self.balance_num, (gf.screen_width // 1.4, gf.screen_height // 10))
+
+        self.screen.blit(self.savings_txt, (gf.screen_width// 1.4, gf.screen_height // 3))
+        self.screen.blit(self.savings_num, (gf.screen_width // 1.4, gf.screen_height // 2.5))
 
         # draws menu buttons
         self.__continue_option.draw(pygame.display.get_surface())
@@ -112,7 +118,7 @@ class SavingsMenu(InGameMenu):
             self.add_savings_option.pressed = False
 
         # extract money
-        if self.extract_savings_option.pressed:
+        if self.extract_savings_option.pressed and self.player.savings_balance > 0:
             self.player.savings_balance -= 10
             self.player.currentBalance += 10
             time.sleep(0.2)
