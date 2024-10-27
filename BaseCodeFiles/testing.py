@@ -12,9 +12,23 @@ names = {"Brown's Bakery": ["Brown's Bakery"],
 dfExtra = pd.DataFrame(names)
 df = pd.concat([dfExtra, df], ignore_index = True)
 df.reset_index()
-df.rename(index={0:'Stock', 1: 'Price', 2:'Stability', 3:'Stocks Owned', 4:'Went up'}, inplace=True)
+df.rename(index={0:'Stock', 1: 'Price', 2:'Stability', 3:'Stocks Owned', 4:'Change'}, inplace=True)
 df = df.transpose()
 df.drop('Unnamed: 0',axis=0,inplace=True)
+
+for index, row in df.iterrows():
+    if row['Stability'] == 'True':
+        row['Stability'] = 'Safe'
+    if row['Stability'] == 'False':
+        row['Stability'] = 'Unstable'
+
+    if row['Change'] == 'True':
+        row['Change'] = '↑'
+    if row['Change'] == 'False':
+        row['Change'] = '↓'
+    if row['Change'] == 'none':
+        row['Change'] = '-'
+
 
 # Step 2: Create a table using matplotlib
 fig, ax = plt.subplots(figsize=(10, len(df)*0.4 + 1))  # Adjust the size accordingly

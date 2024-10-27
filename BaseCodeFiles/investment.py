@@ -42,7 +42,7 @@ class StockMarket:
             if stock == 'Unnamed: 0':
                 continue
             stockData = df[stock].tolist()
-            newStock = Stock(float(stockData[0]), bool(stockData[1]), stock, int(stockData[2]), bool(stockData[3]))
+            newStock = Stock(float(stockData[0]), str(stockData[1]), stock, int(stockData[2]), str(stockData[3]))
             self.stocks.append(newStock)
         return self.stocks
         # returns list of Stocks (class)
@@ -65,6 +65,19 @@ class StockMarket:
         df.rename(index={0: 'Stock', 1: 'Price', 2: 'Stability', 3: 'Stocks Owned', 4: 'Went up'}, inplace=True)
         df = df.transpose()
         df.drop('Unnamed: 0', axis=0, inplace=True)
+
+        for index, row in df.iterrows():
+            if row['Stability'] == 'True':
+                row['Stability'] = 'Safe'
+            if row['Stability'] == 'False':
+                row['Stability'] = 'Unstable'
+
+            if row['Change'] == 'True':
+                row['Change'] = '↑'
+            if row['Change'] == 'False':
+                row['Change'] = '↓'
+            if row['Change'] == 'none':
+                row['Change'] = '-'
 
         # Step 2: Create a table using matplotlib
         fig, ax = plt.subplots(figsize=(10, len(df) * 0.4 + 1))  # Adjust the size accordingly
@@ -121,7 +134,7 @@ class Stock:
         stockMarketObject.updateAllStocks()
 
     def updateStock(self):
-        if self.isSafe == True:
+        if self.isSafe == 'True':
             safetyVar = 4
             perVar = 6
         else:
@@ -131,11 +144,11 @@ class Stock:
         upOrDown = random.randrange(1, safetyVar)
         percentageChange = random.randrange(1, perVar)
         if upOrDown == 1:
-            self.wentUp = True
+            self.wentUp = 'True'
             self.currentPrice = self.currentPrice * (1 + (percentageChange / 100))
             self.currentPrice = round(self.currentPrice, 2)
         else:
-            self.wentUp = False
+            self.wentUp = 'False'
             self.currentPrice = self.currentPrice * (1 - (percentageChange / 100))
             self.currentPrice = round(self.currentPrice, 2)
 
