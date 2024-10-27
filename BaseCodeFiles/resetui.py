@@ -81,6 +81,7 @@ class ResetMenu(ShopMenu):
             self.chip.hunger = 100
             self.chip.thirst = 100
             self.chip.happiness = 100
+            self.chip.outfitted = False
             self.player.currentBalance = 100
             self.player.savings_balance = 100
 

@@ -78,7 +78,7 @@ class Main:
             if self.stk_menu.in_game_menu_state:
                 self.__handle_stocks_menu()
 
-            # -- CHECKS IF IN STOCK MENU --
+            # -- CHECKS IF IN RESET MENU --
             if self.res_menu.in_game_menu_state:
                 self.__handle_reset_menu()
 
