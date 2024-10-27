@@ -53,21 +53,21 @@ class ShopMenu(g_change.GameChange):
         self.decorations_img = pygame.image.load("../Graphics/ingamemenu/decor_pic.PNG")
         self.decorations_img = pygame.transform.scale(self.decorations_img, (80, 80))
 
-        self.buy_food_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 3)
+        self.buy_food_pos = (gf.img_centre(self.buy_txt_white)[0]+100, gf.screen_height // 3)
         self.buy_food_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_food_pos)
-        self.food_price_txt = gf.medium_title_font.render("Price: 5", 1, gf.white)
+        self.food_price_txt = gf.medium_title_font.render("Price: 5.99cc", 1, gf.white)
 
-        self.buy_clothes_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 2)
+        self.buy_clothes_pos = (gf.img_centre(self.buy_txt_white)[0]+100, gf.screen_height // 2)
         self.buy_clothes_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_clothes_pos)
-        self.clothes_price_txt = gf.medium_title_font.render("Price: 5", 1, gf.white)
+        self.clothes_price_txt = gf.medium_title_font.render("Price: 19.99cc", 1, gf.white)
 
-        self.buy_drinks_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 1.5)
+        self.buy_drinks_pos = (gf.img_centre(self.buy_txt_white)[0]+100, gf.screen_height // 1.5)
         self.buy_drinks_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_drinks_pos)
-        self.drinks_price_txt = gf.medium_title_font.render("Price: 5", 1, gf.white)
+        self.drinks_price_txt = gf.medium_title_font.render("Price: 2.50cc", 1, gf.white)
 
-        self.buy_decorations_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 1.2)
+        self.buy_decorations_pos = (gf.img_centre(self.buy_txt_white)[0]+100, gf.screen_height // 1.2)
         self.buy_decorations_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_decorations_pos)
-        self.decorations_price_txt = gf.medium_title_font.render("Price: 5", 1, gf.white)
+        self.decorations_price_txt = gf.medium_title_font.render("Price: 10.00cc", 1, gf.white)
 
         self.__in_game_menu_txt = gf.title_font.render("SHOP", 1, gf.white)
         self.balance_txt = gf.medium_title_font.render(f"Balance:", 1, gf.white)
