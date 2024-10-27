@@ -106,15 +106,15 @@ class SavingsMenu(InGameMenu):
 
         # deposit money
         if self.add_savings_option.pressed:
-            #self.player.savings_balance += 10
-            #self.player.currentBalance -= 10
+            self.player.savings_balance += 10
+            self.player.currentBalance -= 10
             time.sleep(0.2)
             self.add_savings_option.pressed = False
 
         # extract money
         if self.extract_savings_option.pressed:
-            #self.player.savings_balance -= 10
-            #self.player.currentBalance += 10
+            self.player.savings_balance -= 10
+            self.player.currentBalance += 10
             time.sleep(0.2)
             self.extract_savings_option.pressed = False
 
