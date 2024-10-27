@@ -140,7 +140,7 @@ class Main:
 
         if self.in_game_menu.decor_bought and self.res_menu.decor_flag:
             self.in_game_menu.decor_bought = False
-            self.res_menu.decor_flag = True
+            self.res_menu.decor_flag = False
 
     def saving_time(self):
         self.savings.run()
