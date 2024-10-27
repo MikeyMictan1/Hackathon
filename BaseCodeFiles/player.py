@@ -1,8 +1,10 @@
 from datetime import datetime
 import os
+from dataExtractor import DataHandler
 
 class Player:
     def __init__(self):
+        self.dataHandler = DataHandler()
         self.weeklySalary = 100
         self.inflation = 1.0175
         self.bankInterest = 1.015
@@ -11,20 +13,10 @@ class Player:
         self.week = (self.today.strftime("%V")) #Week number via string eg 42 or 01
         self.month = int(self.today.strftime("%m")) #Month number via int eg 11
 
-        self.currentBalance = self.loadBalance() #Loading in the balance
-        self.currentRent = self.loadRent() #Loading in monthly rent
-
+        self.currentBalance = float(self.dataHandler.read_value('currentBalance'))
+        self.currentRent = float(self.dataHandler.read_value('currentRent'))
         # savings
-        self.savings_balance = 50 # hard coded, to be changed
-
-
-    #Storing balance system
-    def loadBalance(self):
-        if os.path.exists('balance.txt'):
-            with open('balance.txt', 'r') as f:
-                return float(f.read().strip())
-        else:
-            return 100
+        self.savings_balance = float(self.dataHandler.read_value('currentRent'))
 
     def updateBalance(self, amount):
         self.currentBalance += amount
@@ -52,12 +44,11 @@ class Player:
 
     #Saving data
     def saveBalance(self):
-        with open('balance.txt', 'w') as f:
-            f.write(str(self.currentBalance))
+        self.dataHandler.replace_value('currentBalance', self.currentBalance)
 
     def saveRent(self):
-        with open('rent.txt', 'w') as f:
-            f.write(str(self.currentRent))
+        self.dataHandler.replace_value('currentRent', self.currentRent)
+
 
     #Saving data
     def savePrevMonthWeek(self):
