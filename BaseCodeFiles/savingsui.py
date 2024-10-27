@@ -2,12 +2,12 @@ import sys, time, pygame
 import gamechange as g_change
 import globalfunctions as gf
 import buttons as btn
-from ingamemenus import *
+from shopui import *
 from datetime import datetime, timedelta
 from player import Player
 
 
-class SavingsMenu(InGameMenu):
+class SavingsMenu(ShopMenu):
     """
     Description:
         Class for the controls menu UI that can be opened at any time while the player is in a level.

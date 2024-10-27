@@ -13,9 +13,10 @@ class Pet(pygame.sprite.Sprite):
         super().__init__(groups)
         self.__wall_sprites = wall_sprites
         self.__position = pos
-        self.__rect_width = 200
+        self.__rect_width = 150
         self.__rect_height = 200
         self.__screen = pygame.display.get_surface()
+        self.outfitted = False
 
         # hud infos
         self.__controls_font = pygame.font.Font("../Fonts/Pixel.ttf", 30)
@@ -24,7 +25,7 @@ class Pet(pygame.sprite.Sprite):
         # animations
         self.__frame = 0
         self.__frame_speed = 0.1
-        self.__animation_dict = {"idle": []}
+        self.__animation_dict = {"idle": [], "outfit":[]}
         self.__animation_dict = gf.import_graphics_dict("pet", self.__animation_dict, "../Graphics")
         self.__state = "idle"
         self.image = self.__animation_dict[self.__state][self.__frame]
@@ -33,6 +34,12 @@ class Pet(pygame.sprite.Sprite):
 
         self.chips_abode_img = pygame.image.load("../Graphics/pet/chips_abode.png")
         self.chips_abode_img = pygame.transform.scale(self.chips_abode_img, (350,300))
+
+        self.controls_img = pygame.image.load("../Graphics/pet/controls.png")
+        self.controls_img = pygame.transform.scale(self.controls_img, (300,200))
+
+        self.windows_img = pygame.image.load("../Graphics/pet/windows.png")
+        self.windows_img = pygame.transform.scale(self.windows_img, (600,800))
 
         self.food_img = pygame.image.load("../Graphics/pet/food.png")
         self.food_img = pygame.transform.scale(self.food_img, (40, 40))
@@ -44,7 +51,7 @@ class Pet(pygame.sprite.Sprite):
         self.thirst_img = pygame.transform.scale(self.thirst_img, (40, 40))
 
         self.rand_decor_img = pygame.image.load("../Graphics/pet/rand_decor.PNG")
-        self.rand_decor_img = pygame.transform.scale(self.rand_decor_img, (200, 200))
+        self.rand_decor_img = pygame.transform.scale(self.rand_decor_img, (150, 200))
         # mikey pygame changes ----
     #
         self.dead = False
@@ -120,14 +127,6 @@ class Pet(pygame.sprite.Sprite):
             #
         #
     #
-    def checkDead(self):
-        if self.hunger <= 0 or self.happiness <= 0 or self.thirst <= 0:
-            return True
-
-        else:
-            return False
-
-
 
     def updatePet(self,numhours):
     #
@@ -157,16 +156,23 @@ class Pet(pygame.sprite.Sprite):
         self.thirst_text= self.general_font.render(f"Thirst:       {self.thirst}", True, (255,255,255))
         self.__screen.blit(self.thirst_text,(gf.screen_width // 15, gf.screen_height // 6.5))
 
+        self.__screen.blit(self.windows_img, (gf.img_centre(self.windows_img)[0], gf.img_centre(self.windows_img)[1]))
         self.__screen.blit(self.chips_abode_img, (gf.img_centre(self.chips_abode_img)[0], 0))
+        self.__screen.blit(self.controls_img, (0, gf.screen_height // 1.4))
         self.__screen.blit(self.food_img, (gf.screen_width // 30, gf.screen_height // 20))
         self.__screen.blit(self.happiness_img, (gf.screen_width // 30, gf.screen_height // 10))
         self.__screen.blit(self.thirst_img, (gf.screen_width // 30, gf.screen_height // 6.5))
-        self.__screen.blit(self.rand_decor_img, (gf.screen_width // 15, gf.screen_height //2))
+        self.__screen.blit(self.rand_decor_img, (gf.screen_width // 15, gf.screen_height //2.5))
 
     def animation(self):
         self.__frame += self.__frame_speed
         if self.__frame >= len(self.__animation_dict["idle"]):  # could be any folder, but took the first one
             self.__frame = 0
+
+        if self.outfitted:
+            self.__state = "outfit"
+        else:
+            self.__state = "idle"
 
         self.image = self.__animation_dict[self.__state][int(self.__frame)]
         self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
