@@ -1,9 +1,9 @@
 import time
 
-from ingamemenus import *
+from shopui import *
 import investment as invest
 
-class StockMenu(InGameMenu):
+class StockMenu(ShopMenu):
     def __init__(self,player, chip):
         super().__init__(player, chip)
         self.player = player

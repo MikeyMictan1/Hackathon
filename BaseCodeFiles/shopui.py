@@ -8,38 +8,8 @@ import time
 from Tips import Tips
 import random
 
-class InGameMenu(g_change.GameChange):
-    """
-    Description:
-        Class for the in-game menu UI that the player can open at any point in a level to quit, or return to the main
-        menu
-
-    Inherits:
-        g_change.GameChange: Inherits from GameChange to use the menu and quit buttons in GameChange.
-
-    Attributes:
-        in_game_menu_state (bool): Flag that checks if the player is in the in-game menu
-        __in_game_menu_graphics_dict (dict): Dictionary containing graphics used for the in-game menu
-        __menu_txt_pos (tuple): new position of the menu button for the in-game menu
-        __menu_option (btn.OptionPress): Menu button
-        __quit_txt_pos (tuple): new position of the quit button for the in-game menu
-        __quit_option (btn.OptionPress): Quit button
-
-        __continue_txt_white (pygame.Surface): Image for the continue button in white
-        __continue_txt_yellow (pygame.Surface): Image for the continue button in yellow
-        __continue_txt_pos (tuple): Position on the screen to draw the continue button
-        __continue_option (btn.OptionPress): Continue button
-
-        menu_overlay (pygame.Surface): Overlay image that is drawn on the screen in the in-game menu
-        __in_game_menu_txt (pygame.font.render): text to be displayed on the in-game menu
-        __in_game_menu_sound (pygame.mixer.Sound): Sound to be played whenever the in-game menu is opened/closed
-        escape_counter (int): The number of times a button that opens the in game menu has been pressed
-    """
+class ShopMenu(g_change.GameChange):
     def __init__(self, player, chip):
-        """
-        Description:
-            Initialisation function for the in game menu class.
-        """
         super().__init__()
         self.in_game_menu_state = False
         self.player = player
@@ -71,6 +41,9 @@ class InGameMenu(g_change.GameChange):
         self.buy_txt_yellow = self.__in_game_menu_graphics_dict["buy"][1]
 
         # buying buttons
+        self.menu_txt_img = pygame.image.load("../Graphics/ingamemenu/shop_pic.PNG")
+        self.menu_txt_img = pygame.transform.scale(self.menu_txt_img, (250, 250))
+
         self.food_img = pygame.image.load("../Graphics/ingamemenu/food_pic.PNG")
         self.food_img = pygame.transform.scale(self.food_img, (80, 80))
         self.clothes_img = pygame.image.load("../Graphics/ingamemenu/clothes_pic.PNG")
@@ -137,13 +110,13 @@ class InGameMenu(g_change.GameChange):
         self.balance_num = gf.medium_title_font.render(f"   {self.player.currentBalance:.2f}cc", 1, gf.white)
 
         self.screen.blit(self.menu_overlay, (gf.img_centre(self.menu_overlay)[0], gf.img_centre(self.menu_overlay)[1]))
-        self.screen.blit(self.__in_game_menu_txt, (gf.img_centre(self.__in_game_menu_txt)[0], gf.screen_height // 30))
 
         self.screen.blit(self.shop_subtitle_txt, (gf.img_centre(self.shop_subtitle_txt)[0], gf.screen_height // 4))
 
         self.screen.blit(self.balance_txt, (gf.screen_width// 1.4, gf.screen_height // 30))
         self.screen.blit(self.balance_num, (gf.screen_width // 1.4, gf.screen_height // 10))
 
+        self.screen.blit(self.menu_txt_img, (gf.img_centre(self.menu_txt_img)[0], -60))
         self.screen.blit(self.food_img, (gf.img_centre(self.buy_txt_white)[0]-380, gf.screen_height // 3 +20))
         self.screen.blit(self.clothes_img, (gf.img_centre(self.buy_txt_white)[0] - 380, gf.screen_height // 2 + 20))
         self.screen.blit(self.drinks_img, (gf.img_centre(self.buy_txt_white)[0] - 380, gf.screen_height // 1.5 + 20))
@@ -175,6 +148,7 @@ class InGameMenu(g_change.GameChange):
 
         if self.buy_clothes_option.pressed:
             self.player.currentBalance -= 5
+            self.chip.outfitted = True
             self.buy_clothes_option.pressed = False
             time.sleep(0.2)
 

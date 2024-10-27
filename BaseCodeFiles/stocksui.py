@@ -6,13 +6,13 @@ import pygame
 import gamechange as g_change
 import globalfunctions as gf
 import buttons as btn
-from ingamemenus import *
+from shopui import *
 from investment import StockMarket
 from datetime import datetime, timedelta
 from player import Player
 
 
-class StocksMenu(InGameMenu):
+class StocksMenu(ShopMenu):
     """
     Description:
         Class for the controls menu UI that can be opened at any time while the player is in a level.

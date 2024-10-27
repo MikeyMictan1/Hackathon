@@ -4,7 +4,7 @@ import mainmenu as mn_menu
 import homelevel as home_lvl
 from BaseCodeFiles import levellayout as lvl
 import gamechange as g_change
-import ingamemenus as ig_menu
+import shopui as ig_menu
 import savingsui as sav_menu
 from BaseCodeFiles.globalfunctions import tile_size
 import savings as sav
@@ -24,9 +24,9 @@ class Main:
         self.__in_game = True
 
         # level initialisation
-        self.__home_level = home_lvl.MazeLevel(lvl.home)
+        self.__home_level = home_lvl.HomeLevel(lvl.home)
         self.game_over = g_change.GameOver()
-        self.in_game_menu = ig_menu.InGameMenu(self.__home_level.player, self.__home_level.chip)
+        self.in_game_menu = ig_menu.ShopMenu(self.__home_level.player, self.__home_level.chip)
         self.savings_menu = sav_menu.SavingsMenu(self.__home_level.player, self.__home_level.chip)
         self.stk_menu = stk_menu.StockMenu(self.__home_level.player, self.__home_level.chip)
         self.savings = sav.Savings(self.__home_level.player)
