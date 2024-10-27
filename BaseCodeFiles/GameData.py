@@ -10,7 +10,7 @@ class GameData:
         self.petHunger = 0
         self.petThirst = 0
         self.ownedItems = []
-        self.playerMoney = 0
+        self.playerMoney = 100
         self.playerSavingsAccount = 0 # amount of money in savings, Null if no savings
         self.lastTimeRecorded = []
 

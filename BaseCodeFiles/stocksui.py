@@ -1,13 +1,18 @@
-import sys, time, pygame
+import sys
+import time
+
+import pygame
+
 import gamechange as g_change
 import globalfunctions as gf
 import buttons as btn
 from ingamemenus import *
+from investment import StockMarket
 from datetime import datetime, timedelta
 from player import Player
 
 
-class SavingsMenu(InGameMenu):
+class StocksMenu(InGameMenu):
     """
     Description:
         Class for the controls menu UI that can be opened at any time while the player is in a level.
@@ -23,10 +28,10 @@ class SavingsMenu(InGameMenu):
         super().__init__(player, chip)
         self.player = player
         self.chip = chip
-        self.bank_money = Player()
+        self.stockMarket = StockMarket()
 
-
-        self.__in_game_menu_graphics_dict = {"continue": [], "overlay": [], "extract": [], "deposit": []}
+                                            # return         grey overlay
+        self.__in_game_menu_graphics_dict = {"continue": [], "overlay": [], "Buy": [], "Sell": []}
         self.__in_game_menu_graphics_dict = gf.import_graphics_dict("ingamemenu", self.__in_game_menu_graphics_dict,
                                                                  "../Graphics")
 

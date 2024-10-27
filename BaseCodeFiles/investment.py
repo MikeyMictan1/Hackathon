@@ -1,6 +1,8 @@
 import pandas as pd
 import random
 from player import Player
+import matplotlib.pyplot as plt
+from PIL import Image
 
 '''
 TO USE:
@@ -31,6 +33,7 @@ class StockMarket:
             data[stock.name] = stockData
         df = pd.DataFrame(data)
         df.to_csv('StockMarket.csv')
+        self.generateImage()
 
     def readCSV(self):
         df = pd.read_csv('StockMarket.csv')
@@ -48,6 +51,47 @@ class StockMarket:
         for stock in self.stocks:
             stock.updateStock()
 
+    def generateImage(self):
+        # Step 1: Read the CSV file
+        df = pd.read_csv('stockMarket.csv')
+        names = {"Brown's Bakery": ["Brown's Bakery"],
+                 'Capital One': ['Capital One'],
+                 'Chip NFT': ['Chip NFT'],
+                 'Chipdo': ["Chipdo"],
+                 }
+        dfExtra = pd.DataFrame(names)
+        df = pd.concat([dfExtra, df], ignore_index=True)
+        df.reset_index()
+        df.rename(index={0: 'Stock', 1: 'Price', 2: 'Stability', 3: 'Stocks Owned', 4: 'Went up'}, inplace=True)
+        df = df.transpose()
+        df.drop('Unnamed: 0', axis=0, inplace=True)
+
+        # Step 2: Create a table using matplotlib
+        fig, ax = plt.subplots(figsize=(10, len(df) * 0.4 + 1))  # Adjust the size accordingly
+        ax.axis('tight')
+        ax.axis('off')
+        table = ax.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
+
+        # Adjust the font size and cell dimensions if needed
+        table.auto_set_font_size(False)
+        table.set_fontsize(10)
+        table.scale(1, 1.5)  # You can adjust the scaling factor
+
+        # Customize the background colors
+        # Set background color for header row
+        header_color = '#769974'  # Light gray for the header
+        for i, col in enumerate(df.columns):
+            table[0, i].set_facecolor(header_color)
+
+        # Set background color for all cells
+        cell_color = '#a7cca5'  # Light background for cells
+        for row in range(1, len(df) + 1):
+            for col in range(len(df.columns)):
+                table[row, col].set_facecolor(cell_color)
+
+        # Save the table as an image
+        plt.savefig('stockMarket.png', bbox_inches='tight', dpi=300)
+
 class Stock:
     def __init__(self, currentPrice, isSafe, stockName, numberOwned, wentUp):
         self.name = stockName
@@ -56,19 +100,19 @@ class Stock:
         self.numberOwned = numberOwned # number of stocks actually owned
         self.wentUp = wentUp
 
-    def buyStock(self, numOfStocks, playerObject):
+    def buyStock(self, numOfStocks, playerObject, stockMarketObject):
         amountToSpend = self.currentPrice*numOfStocks
         if amountToSpend > playerObject.loadBalance():
             print("You don't have enough!")
         else:
             self.numberOwned += numOfStocks
-            playerObject.updateBalance(round(-(amountToSpend),2))
-        stockMarket.updateCSV()
+            playerObject.updateBalance(round(-amountToSpend, 2))
+        stockMarketObject.updateCSV()
 
-    def sellStock(self, numOfStocks, playerObject):
+    def sellStock(self, numOfStocks, playerObject, stockMarketObject):
         self.numberOwned -= numOfStocks
         playerObject.updateBalance(round(self.currentPrice * numOfStocks, 2))
-        stockMarket.updateCSV()
+        stockMarketObject.updateCSV()
 
     def updateStock(self):
         if self.isSafe == True:
