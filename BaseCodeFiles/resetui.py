@@ -14,6 +14,8 @@ class ResetMenu(ShopMenu):
         self.stock3 = self.stock_market.readCSV()[2]
         self.stock4 = self.stock_market.readCSV()[3]
 
+        self.decor_flag = True
+
         self.__in_game_menu_graphics_dict = {"continue": [], "overlay": [], "reset": []}
         self.__in_game_menu_graphics_dict = gf.import_graphics_dict("ingamemenu", self.__in_game_menu_graphics_dict,
                                                                     "../Graphics")
@@ -76,6 +78,7 @@ class ResetMenu(ShopMenu):
             self.__continue_option.pressed = False
 
         if self.reset_option.pressed:
+            self.decor_flag = False
             #self.chip.resetStats()
             # brute-force method
             self.chip.hunger = 100

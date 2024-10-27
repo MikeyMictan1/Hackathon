@@ -138,6 +138,10 @@ class Main:
         if self.in_game_menu.decor_bought:
             self.__screen.blit(self.decorations_img, (tile_size*7, tile_size))
 
+        if self.in_game_menu.decor_bought and self.res_menu.decor_flag:
+            self.in_game_menu.decor_bought = False
+            self.res_menu.decor_flag = True
+
     def saving_time(self):
         self.savings.run()
 
