@@ -1,4 +1,6 @@
 import sys
+import time
+
 import pygame
 
 import gamechange as g_change
@@ -53,21 +55,19 @@ class SavingsMenu(InGameMenu):
         self.deposit_txt_white = self.__in_game_menu_graphics_dict["deposit"][0]
         self.deposit_txt_yellow = self.__in_game_menu_graphics_dict["deposit"][1]
 
-        #self.buy_txt_white = self.__in_game_menu_graphics_dict["buy"][0]
-        #self.buy_txt_yellow = self.__in_game_menu_graphics_dict["buy"][1]
 
-        # buying buttons
-
+        # deposit button
         self.add_savings_pos = (gf.img_centre(self.deposit_txt_white)[0], gf.screen_height // 3)
         self.add_savings_option = btn.OptionPress(self.deposit_txt_white, self.deposit_txt_yellow, self.add_savings_pos)
 
-
+        # extract button
         self.extract_savings_pos = (gf.img_centre(self.extract_txt_white)[0], gf.screen_height // 2)
         self.extract_savings_option = btn.OptionPress(self.extract_txt_white, self.extract_txt_yellow, self.extract_savings_pos)
 
-
         self.__in_game_menu_txt = gf.medium_title_font.render("Savings' Account Menu", 1, gf.white)
         self.balance_txt = gf.medium_title_font.render("Balance", 1, gf.white)
+
+        self.savings_txt = gf.medium_title_font.render("Savings", 1, gf.white)
         # --- GRAPHICS ---
 
         self.escape_counter = 0
@@ -91,35 +91,40 @@ class SavingsMenu(InGameMenu):
 
         if self.escape_counter % 2 == 0:  # makes sure esc will open AND close the in game menu
             self.in_game_menu_state = False
-        self.balance_num = gf.medium_title_font.render(f"{self.player.currentBalance:.2f}", 1, gf.white)
+        self.balance_num = gf.medium_title_font.render(f"{self.player.currentBalance:.2f}cc", 1, gf.white)
+        self.savings_num = gf.medium_title_font.render(f"{self.player.savings_balance:.2f}cc", 1, gf.white)
 
         self.screen.blit(self.menu_overlay, (gf.img_centre(self.menu_overlay)[0], gf.img_centre(self.menu_overlay)[1]))
         self.screen.blit(self.__in_game_menu_txt, (gf.img_centre(self.__in_game_menu_txt)[0]-150, gf.screen_height // 30))
+
         self.screen.blit(self.balance_txt, (gf.screen_width// 1.4, gf.screen_height // 30))
         self.screen.blit(self.balance_num, (gf.screen_width // 1.4, gf.screen_height // 10))
+
+        self.screen.blit(self.savings_txt, (gf.screen_width// 1.4, gf.screen_height // 3))
+        self.screen.blit(self.savings_num, (gf.screen_width // 1.4, gf.screen_height // 2.5))
 
         # draws menu buttons
         self.__continue_option.draw(pygame.display.get_surface())
         self.__quit_option.draw(pygame.display.get_surface())
 
         self.add_savings_option.draw(pygame.display.get_surface())
-
-
         self.extract_savings_option.draw(pygame.display.get_surface())
 
-
+        # deposit money
         if self.add_savings_option.pressed:
-            self.savings.moneyIn = 50
-            self.add_savings_option.pressed = False
-            self.bank_money.updateBalance(-50)
+            self.player.savings_balance += 10
+            self.player.currentBalance -= 10
             time.sleep(0.2)
+            self.add_savings_option.pressed = False
 
-        if self.extract_savings_option.pressed:
-            if (self.savings.isDone(datetime.now())): #what is current time???
-                self.savings.moneyIn = 0
-                self.bank_money.updateBalance(self.savings.getMoney) #error here there may be a mixup bw str and int
-                time.sleep(0.2)
+        # extract money
+        if self.extract_savings_option.pressed and self.player.savings_balance > 0:
+            self.player.savings_balance -= 10
+            self.player.currentBalance += 10
+            time.sleep(0.2)
+            self.extract_savings_option.pressed = False
 
+        # continue button
         if self.__continue_option.pressed:  # if continue button pressed, close menu
             self.escape_counter += 1
             self.in_game_menu_state = False

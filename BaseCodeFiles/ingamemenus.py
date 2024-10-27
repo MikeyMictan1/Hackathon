@@ -115,7 +115,7 @@ class InGameMenu(g_change.GameChange):
         """
         if self.escape_counter % 2 == 0:  # makes sure esc will open AND close the in game menu
             self.in_game_menu_state = False
-        self.balance_num = gf.medium_title_font.render(f"   {self.player.currentBalance:.2f}", 1, gf.white)
+        self.balance_num = gf.medium_title_font.render(f"   {self.player.currentBalance:.2f}cc", 1, gf.white)
 
         self.screen.blit(self.menu_overlay, (gf.img_centre(self.menu_overlay)[0], gf.img_centre(self.menu_overlay)[1]))
         self.screen.blit(self.__in_game_menu_txt, (gf.img_centre(self.__in_game_menu_txt)[0], gf.screen_height // 30))
