@@ -90,7 +90,7 @@ class StockMarket:
                 table[row, col].set_facecolor(cell_color)
 
         # Save the table as an image
-        plt.savefig('stockMarket.png', bbox_inches='tight', dpi=300)
+        plt.savefig('stockMarket.png', bbox_inches='tight', dpi=300, transparent=True)
 
 class Stock:
     def __init__(self, currentPrice, isSafe, stockName, numberOwned, wentUp):
@@ -109,10 +109,16 @@ class Stock:
             playerObject.updateBalance(round(-amountToSpend, 2))
         stockMarketObject.updateCSV()
 
+        # FOR NOW!!!
+        stockMarketObject.updateAllStocks()
+
     def sellStock(self, numOfStocks, playerObject, stockMarketObject):
         self.numberOwned -= numOfStocks
         playerObject.updateBalance(round(self.currentPrice * numOfStocks, 2))
         stockMarketObject.updateCSV()
+
+        # FOR NOW!!!
+        stockMarketObject.updateAllStocks()
 
     def updateStock(self):
         if self.isSafe == True:
