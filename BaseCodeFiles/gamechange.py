@@ -139,6 +139,7 @@ class GameOver(GameChange):
             self.screen.blit(self.__background, (0, 0))
             self.screen.blit(self.__game_over_txt, (gf.img_centre(self.__game_over_txt)[0], gf.screen_height // 20))
 
+
             # draw buttons onto menu
             self.display_menu()
 

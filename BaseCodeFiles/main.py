@@ -119,7 +119,19 @@ class Main:
 
     def check_game_over(self, home_lvl):
         if home_lvl.chip.happiness <= 0 or home_lvl.chip.hunger <= 0 or home_lvl.chip.thirst <= 0 or home_lvl.player.currentBalance <= 0:
-            print("CHIPS DEAD")
+            if home_lvl.chip.happiness <= 0:
+                home_lvl.chip.happiness += 10
+
+            if home_lvl.chip.hunger <= 0:
+                home_lvl.chip.hunger += 10
+
+            if home_lvl.chip.thirst <= 0:
+                home_lvl.chip.thirst += 10
+
+            if home_lvl.player.currentBalance <= 0:
+                home_lvl.player.currentBalance += 10
+
+            home_lvl.chip.resetStats()
             self.game_over.run()
 
     def check_decor(self):

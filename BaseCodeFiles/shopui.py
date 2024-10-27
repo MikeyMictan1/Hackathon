@@ -142,26 +142,26 @@ class ShopMenu(g_change.GameChange):
 
 
         if self.buy_food_option.pressed and self.chip.hunger <= 95:
-            self.player.currentBalance -= 5
+            self.player.currentBalance -= 5.99
             self.chip.hunger += 5
             self.buy_food_option.pressed = False
             time.sleep(0.2)
 
         if self.buy_clothes_option.pressed:
-            self.player.currentBalance -= 5
+            self.player.currentBalance -= 19.99
             self.chip.outfitted = True
             self.buy_clothes_option.pressed = False
             time.sleep(0.2)
 
         if self.buy_drinks_option.pressed and self.chip.thirst <= 95:
-            self.player.currentBalance -= 5
+            self.player.currentBalance -= 2.5
             self.chip.thirst += 5
             self.buy_drinks_option.pressed = False
             time.sleep(0.2)
 
         if self.buy_decorations_option.pressed and self.chip.happiness <= 95:
             self.decor_bought = True
-            self.player.currentBalance -= 5
+            self.player.currentBalance -= 10
             self.chip.happiness += 5
             self.buy_decorations_option.pressed = False
             time.sleep(0.2)
