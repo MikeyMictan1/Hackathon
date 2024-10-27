@@ -140,7 +140,7 @@ class ShopMenu(g_change.GameChange):
         self.screen.blit(self.decorations_price_txt, (gf.img_centre(self.buy_txt_white)[0]-250, gf.screen_height // 1.2 +30))
 
 
-        if self.buy_food_option.pressed:
+        if self.buy_food_option.pressed and self.chip.hunger <= 95:
             self.player.currentBalance -= 5
             self.chip.hunger += 5
             self.buy_food_option.pressed = False
@@ -152,13 +152,13 @@ class ShopMenu(g_change.GameChange):
             self.buy_clothes_option.pressed = False
             time.sleep(0.2)
 
-        if self.buy_drinks_option.pressed:
+        if self.buy_drinks_option.pressed and self.chip.thirst <= 95:
             self.player.currentBalance -= 5
             self.chip.thirst += 5
             self.buy_drinks_option.pressed = False
             time.sleep(0.2)
 
-        if self.buy_decorations_option.pressed:
+        if self.buy_decorations_option.pressed and self.chip.happiness <= 95:
             self.decor_bought = True
             self.player.currentBalance -= 5
             self.chip.happiness += 5
