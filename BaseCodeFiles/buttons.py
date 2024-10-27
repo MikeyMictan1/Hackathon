@@ -60,3 +60,8 @@ class OptionPress:
            """
         self.__mouse_press()
         screen.blit(self.__option_image, self.__position)
+
+    def transform(self, x, y):
+        self.__image1 = pygame.transform.scale(self.__image1, (x, y))
+        self.__image2 = pygame.transform.scale(self.__image2, (x, y))
+        self.__button_rect = self.__image1.get_rect(topleft=self.__position)

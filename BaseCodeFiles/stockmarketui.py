@@ -1,10 +1,12 @@
 from ingamemenus import *
+import investment as invest
 
 class StockMenu(InGameMenu):
     def __init__(self,player, chip):
         super().__init__(player, chip)
         self.player = player
         self.chip = chip
+        self.stock_market = invest.StockMarket()
 
         self.__in_game_menu_graphics_dict = {"continue": [], "overlay": [], "buy": []}
         self.__in_game_menu_graphics_dict = gf.import_graphics_dict("ingamemenu", self.__in_game_menu_graphics_dict,
@@ -29,17 +31,21 @@ class StockMenu(InGameMenu):
         self.escape_counter = 0
 
         # STOCKS
-        self.buy_stock1_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 3)
+        self.buy_stock1_pos = (gf.img_centre(self.buy_txt_white)[0]+300, 300)
         self.buy_stock1_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_stock1_pos)
+        self.buy_stock1_option.transform(90,50)
 
-        self.buy_stock2_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 2)
+        self.buy_stock2_pos = (gf.img_centre(self.buy_txt_white)[0]+300, 350)
         self.buy_stock2_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_stock2_pos)
+        self.buy_stock2_option.transform(90,50)
 
-        self.buy_stock3_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 1.5)
+        self.buy_stock3_pos = (gf.img_centre(self.buy_txt_white)[0]+300, 400)
         self.buy_stock3_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_stock3_pos)
+        self.buy_stock3_option.transform(90,50)
 
-        self.buy_stock4_pos = (gf.img_centre(self.buy_txt_white)[0], gf.screen_height // 1.2)
+        self.buy_stock4_pos = (gf.img_centre(self.buy_txt_white)[0]+300, 450)
         self.buy_stock4_option = btn.OptionPress(self.buy_txt_white, self.buy_txt_yellow, self.buy_stock4_pos)
+        self.buy_stock4_option.transform(90,50)
 
 
 
@@ -57,6 +63,8 @@ class StockMenu(InGameMenu):
             Displays the controls menu on the screen.
         """
         # makes sure the menu will open and close after open/close buttons are pressed
+        self.stock_table_img = pygame.image.load("stockMarket.png")
+        self.stock_table_img = pygame.transform.scale(self.stock_table_img, (800, 400))
 
         if self.escape_counter % 2 == 0:  # makes sure esc will open AND close the in game menu
             self.in_game_menu_state = False
@@ -69,6 +77,7 @@ class StockMenu(InGameMenu):
         self.screen.blit(self.balance_txt, (gf.screen_width// 1.4, gf.screen_height // 30))
         self.screen.blit(self.balance_num, (gf.screen_width // 1.4, gf.screen_height // 10))
 
+        self.screen.blit(self.stock_table_img, (0, gf.screen_height // 2 - self.stock_table_img.get_height() // 2))
         # draws menu buttons
         self.__continue_option.draw(pygame.display.get_surface())
         self.__quit_option.draw(pygame.display.get_surface())
@@ -82,6 +91,14 @@ class StockMenu(InGameMenu):
             self.escape_counter += 1
             self.in_game_menu_state = False
             self.__continue_option.pressed = False
+
+        if self.buy_stock1_option.pressed:
+            stock1 = self.stock_market.readCSV()[0]
+            stock1.buyStock(1, self.player, self.stock_market)
+
+
+            time.sleep(0.2)
+            self.buy_stock1_option.pressed = False
 
         if self.__quit_option.pressed:  # quits the game if "quit" is pressed
             pygame.quit()
