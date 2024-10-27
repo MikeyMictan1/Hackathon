@@ -7,6 +7,7 @@ import pet as pet
 from datetime import datetime
 import csv, os
 import player as pl
+import RandomEvents as Events
 
 
 class MazeLevel:
@@ -17,12 +18,6 @@ class MazeLevel:
         Acts as the interface for which enemies and characters interact.
 
     Attributes:
-        __powerup_sprites (pygame.sprite.Group): Sprite group consisting of speed powerup sprites
-        __coin_sprites (pygame.sprite.Group): Sprite group consisting of coin sprites
-        __health_pot_sprites (pygame.sprite.Group): Sprite group consisting of health potion sprites
-        __exit_sprites (pygame.sprite.Group): Sprite group consisting of exit portal sprites
-        __enemy_sprites (pygame.sprite.Group): Sprite group consisting of enemy sprites
-        __sword_sprites (pygame.sprite.Group): Sprite group consisting of sword sprites
         __game_camera (pygame.sprite.Group): Sprite group consisting of the camera that the character centres around
         __wall_sprites (pygame.sprite.Group): Sprite group consisting of maze wall sprites
 
@@ -38,19 +33,13 @@ class MazeLevel:
             maze_list (list): The depth-first generated maze, as a list.
         """
         # sprite groups setup
-        self.__powerup_sprites = pygame.sprite.Group()
-        self.__coin_sprites = pygame.sprite.Group()
-        self.__health_pot_sprites = pygame.sprite.Group()
-        self.__exit_sprites = pygame.sprite.Group()
-        self.__enemy_sprites = pygame.sprite.Group()
-        self.__sword_sprites = pygame.sprite.Group()
         self.__wall_sprites = pygame.sprite.Group()
         self.__game_camera = cam.GameCamera()
         self.lastTimeCheck = datetime.now() # change this later becuase it should be initialised to what is in the file if there is one
         self.player = pl.Player()
         # maze creation
         self.create_pygame_home(layout_list)
-
+        #self.Events = Events.Event()
         # other setup
         self.is_active = True
         self.level_type = "normal"
@@ -118,7 +107,6 @@ class MazeLevel:
         currentTime = datetime.now()
         difference = currentTime - self.lastTimeCheck
         diffHours = (difference.total_seconds() / 3600)
-        print(diffHours)
         if diffHours > 1:
         #
             self.lastTimeCheck = currentTime
