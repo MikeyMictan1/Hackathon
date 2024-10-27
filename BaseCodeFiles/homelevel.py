@@ -125,31 +125,17 @@ class MazeLevel:
     def run_level(self):
         self.__game_camera.draw_camera_offset()
         self.__game_camera.update()
-        self.update_time()
         self.updatePet(self.chip)
+        self.debug_time()
 
-    # Functions that deal with time every day
-    def update_time(self):
-        last_run_date = self.check_last_date()
-        current_date = datetime.now()
-        if last_run_date is None or current_date.date() > last_run_date.date():
+    def debug_time(self):
+        current_time = datetime.now()
 
-            print("hi")
-            # Update the CSV with the current date
-            self.check_current_date()
-
-    def check_current_date(self):
-        with open(self.csv_file, 'w', newline='') as file:
-            writer = csv.writer(file)
-            current_date = datetime.now().strftime('%Y-%m-%d')
-            writer.writerow([current_date])
-
-    def check_last_date(self):
-        if os.path.exists(self.csv_file):
-            with open(self.csv_file, 'r') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    # Parse the stored date into a datetime object
-                    last_run_date = datetime.strptime(row[0], '%Y-%m-%d')
-                    return last_run_date
-        return None
+        # Extract hours, minutes, and seconds
+        hours = current_time.hour
+        minutes = current_time.minute
+        seconds = current_time.second
+        print(f"Hours: {hours}")
+        print(f"Minutes: {minutes}")
+        print(f"Seconds: {seconds}")
+        print("----------------------------------------")
