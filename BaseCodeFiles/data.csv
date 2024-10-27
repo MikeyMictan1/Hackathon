@@ -1,7 +1,7 @@
 Item,Data
-currentBalance,100.0
-currentRent,40.0
+currentBalance,50.0
+currentRent,50.0
 savingsBalance,50
-thirstLevel,99
-hungerLevel,97
-happinessLevel,98
+thirstLevel,92
+hungerLevel,91
+happinessLevel,84

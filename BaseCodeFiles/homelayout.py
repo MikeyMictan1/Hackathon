@@ -1,7 +1,4 @@
 import pygame
-import random
-import os
-
 
 class WallVisible(pygame.sprite.Sprite):
     """

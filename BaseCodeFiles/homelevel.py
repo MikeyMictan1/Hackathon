@@ -5,9 +5,7 @@ import globalfunctions as gf
 import camera as cam
 import pet as pet
 from datetime import datetime
-import csv, os
 import player as pl
-import RandomEvents as Events
 
 
 class MazeLevel:

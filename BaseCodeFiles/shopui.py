@@ -1,12 +1,12 @@
 import sys
 import pygame
-
 import gamechange as g_change
 import globalfunctions as gf
 import buttons as btn
 import time
 from Tips import Tips
 import random
+from dataExtractor import DataHandler
 
 class ShopMenu(g_change.GameChange):
     def __init__(self, player, chip):
@@ -16,6 +16,7 @@ class ShopMenu(g_change.GameChange):
         self.chip = chip
         self.decor_bought = False
         self.tip = Tips()
+        self.wallet = DataHandler()
 
         self.choice = random.choice(list(self.tip.tips))
         self.shop_subtitle_txt = gf.smaller_title_font.render(str(self.choice), 1, gf.white)
@@ -169,6 +170,8 @@ class ShopMenu(g_change.GameChange):
             self.escape_counter += 1
             self.in_game_menu_state = False
             self.__continue_option.pressed = False
+
+        self.wallet.replace_value('currentBalance', self.player.currentBalance)
 
         if self.__quit_option.pressed:  # quits the game if "quit" is pressed
             pygame.quit()

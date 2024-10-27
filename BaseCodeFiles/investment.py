@@ -1,8 +1,6 @@
 import pandas as pd
 import random
-from player import Player
 import matplotlib.pyplot as plt
-from PIL import Image
 
 '''
 TO USE:

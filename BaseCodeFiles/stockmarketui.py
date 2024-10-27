@@ -1,5 +1,3 @@
-import time
-
 from shopui import *
 import investment as invest
 

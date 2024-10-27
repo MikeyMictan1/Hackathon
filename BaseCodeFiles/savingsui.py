@@ -1,10 +1,7 @@
-import sys, time, pygame
-import gamechange as g_change
-import globalfunctions as gf
-import buttons as btn
+import pygame
 from shopui import *
-from datetime import datetime, timedelta
 from player import Player
+from dataExtractor import DataHandler
 
 
 class SavingsMenu(ShopMenu):
@@ -24,6 +21,7 @@ class SavingsMenu(ShopMenu):
         self.player = player
         self.chip = chip
         self.bank_money = Player()
+        self.wallet = DataHandler()
 
 
         self.__in_game_menu_graphics_dict = {"continue": [], "overlay": [], "extract": [], "deposit": []}
@@ -123,6 +121,8 @@ class SavingsMenu(ShopMenu):
             self.escape_counter += 1
             self.in_game_menu_state = False
             self.__continue_option.pressed = False
+
+        self.wallet.replace_value('currentBalance', self.player.savings_balance)
 
         if self.__quit_option.pressed:  # quits the game if "quit" is pressed
             pygame.quit()
