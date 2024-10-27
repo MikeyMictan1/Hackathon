@@ -36,7 +36,7 @@ class Pet(pygame.sprite.Sprite):
         self.name = "chip"
         self.maxHunger,self.hunger = 100,100#hunger
         self.maxHappiness, self.happiness = 100,100#happiness
-        self.maxThirst, self.thirst = 100,100#thirst
+        self.maxThirst, self.thirst = 100,100#thirsty
         self.highenough = 80
         self.tooLow = 20
         self.happinessTick = -2
