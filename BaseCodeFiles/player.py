@@ -17,6 +17,8 @@ class Player:
         self.currentRent = float(self.dataHandler.read_value('currentRent'))
         # savings
         self.savings_balance = float(self.dataHandler.read_value('currentRent'))
+        self.savingAccountOpen = False # CHANGE TO READ FILE
+        self.savingAccountDate = None # CHANGE TO READ FILE
 
     def updateBalance(self, amount):
         self.currentBalance += amount
