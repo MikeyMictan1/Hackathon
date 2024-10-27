@@ -14,6 +14,10 @@ class Player:
         self.currentBalance = self.loadBalance() #Loading in the balance
         self.currentRent = self.loadRent() #Loading in monthly rent
 
+        # savings
+        self.savings_balance = 50 # hard coded, to be changed
+
+
     #Storing balance system
     def loadBalance(self):
         if os.path.exists('balance.txt'):
