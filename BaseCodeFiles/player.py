@@ -16,7 +16,7 @@ class Player:
         self.currentBalance = float(self.dataHandler.read_value('currentBalance'))
         self.currentRent = float(self.dataHandler.read_value('currentRent'))
         # savings
-        self.savings_balance = float(self.dataHandler.read_value('savingsBalance'))
+        self.savings_balance = float(self.dataHandler.read_value('currentRent'))
 
     def updateBalance(self, amount):
         self.currentBalance += amount
@@ -49,9 +49,6 @@ class Player:
     def saveRent(self):
         self.dataHandler.replace_value('currentRent', self.currentRent)
 
-    def saveSavings(self):
-        self.dataHandler.replace_value('currentRent', self.savings_balance)
-
 
     #Saving data
     def savePrevMonthWeek(self):
@@ -76,7 +73,6 @@ class Player:
 
         self.saveBalance()
         self.saveRent()
-        self.saveSavings()
         self.savePrevMonthWeek()
 
 

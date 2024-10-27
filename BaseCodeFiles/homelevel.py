@@ -138,7 +138,6 @@ class MazeLevel:
         self.__game_camera.update()
         self.updatePet(self.chip)
         self.debug_time()
-        print(self.petHunger)
 
     def debug_time(self):
         current_time = datetime.now()

@@ -52,7 +52,6 @@ class Savings:
         if current_minute != last_minute:
             self.player.savings_balance = 1.025*self.player.savings_balance
 
-
                 # Update the last run time in the file for future reference
             self.write_current_time()
 

@@ -103,7 +103,7 @@ class StocksMenu(ShopMenu):
         self.extract_savings_option.draw(pygame.display.get_surface())
 
         # deposit money
-        if self.add_savings_option.pressed:
+        if self.add_savings_option.pressed and self.player.currentBalance > 0:
             self.player.savings_balance += 10
             self.player.currentBalance -= 10
             time.sleep(0.2)
@@ -125,6 +125,7 @@ class StocksMenu(ShopMenu):
         if self.__quit_option.pressed:  # quits the game if "quit" is pressed
             pygame.quit()
             sys.exit()
+
 
 
 
