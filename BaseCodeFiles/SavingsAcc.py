@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 
-class SavingsAcc():
+class SavingsAcc:
 #
     def __init__(self,endDate,moneyIn):
     #

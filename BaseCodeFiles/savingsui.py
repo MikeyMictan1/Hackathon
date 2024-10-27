@@ -1,4 +1,6 @@
 import sys
+import time
+
 import pygame
 
 import gamechange as g_change
@@ -53,18 +55,14 @@ class SavingsMenu(InGameMenu):
         self.deposit_txt_white = self.__in_game_menu_graphics_dict["deposit"][0]
         self.deposit_txt_yellow = self.__in_game_menu_graphics_dict["deposit"][1]
 
-        #self.buy_txt_white = self.__in_game_menu_graphics_dict["buy"][0]
-        #self.buy_txt_yellow = self.__in_game_menu_graphics_dict["buy"][1]
 
-        # buying buttons
-
+        # deposit button
         self.add_savings_pos = (gf.img_centre(self.deposit_txt_white)[0], gf.screen_height // 3)
         self.add_savings_option = btn.OptionPress(self.deposit_txt_white, self.deposit_txt_yellow, self.add_savings_pos)
 
-
+        # extract button
         self.extract_savings_pos = (gf.img_centre(self.extract_txt_white)[0], gf.screen_height // 2)
         self.extract_savings_option = btn.OptionPress(self.extract_txt_white, self.extract_txt_yellow, self.extract_savings_pos)
-
 
         self.__in_game_menu_txt = gf.medium_title_font.render("Savings' Account Menu", 1, gf.white)
         self.balance_txt = gf.medium_title_font.render("Balance", 1, gf.white)
@@ -95,6 +93,7 @@ class SavingsMenu(InGameMenu):
 
         self.screen.blit(self.menu_overlay, (gf.img_centre(self.menu_overlay)[0], gf.img_centre(self.menu_overlay)[1]))
         self.screen.blit(self.__in_game_menu_txt, (gf.img_centre(self.__in_game_menu_txt)[0]-150, gf.screen_height // 30))
+
         self.screen.blit(self.balance_txt, (gf.screen_width// 1.4, gf.screen_height // 30))
         self.screen.blit(self.balance_num, (gf.screen_width // 1.4, gf.screen_height // 10))
 
@@ -103,23 +102,23 @@ class SavingsMenu(InGameMenu):
         self.__quit_option.draw(pygame.display.get_surface())
 
         self.add_savings_option.draw(pygame.display.get_surface())
-
-
         self.extract_savings_option.draw(pygame.display.get_surface())
 
-
+        # deposit money
         if self.add_savings_option.pressed:
-            self.savings.moneyIn = 50
-            self.add_savings_option.pressed = False
-            self.bank_money.updateBalance(-50)
+            #self.player.savings_balance += 10
+            #self.player.currentBalance -= 10
             time.sleep(0.2)
+            self.add_savings_option.pressed = False
 
+        # extract money
         if self.extract_savings_option.pressed:
-            if (self.savings.isDone(datetime.now())): #what is current time???
-                self.savings.moneyIn = 0
-                self.bank_money.updateBalance(self.savings.getMoney) #error here there may be a mixup bw str and int
-                time.sleep(0.2)
+            #self.player.savings_balance -= 10
+            #self.player.currentBalance += 10
+            time.sleep(0.2)
+            self.extract_savings_option.pressed = False
 
+        # continue button
         if self.__continue_option.pressed:  # if continue button pressed, close menu
             self.escape_counter += 1
             self.in_game_menu_state = False
