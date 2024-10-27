@@ -106,7 +106,8 @@ class MazeLevel:
     #
         currentTime = datetime.now()
         difference = currentTime - self.lastTimeCheck
-        diffHours = (difference.total_seconds() / 3600)
+        diffHours = (difference.total_seconds() / 60)#hange this to 3600 later
+        print("this is the diff in minutes ", diffHours)
         if diffHours > 1:
         #
             self.lastTimeCheck = currentTime
