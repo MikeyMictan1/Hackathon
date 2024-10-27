@@ -29,7 +29,7 @@ class StockMarket:
     def updateCSV(self):
         data = {}
         for stock in self.stocks:
-            stockData = [stock.currentPrice, stock.isSafe, stock.numberOwned, stock.wentUp]
+            stockData = [stock.currentPrice, stock.isSafe, stock.numberOwned, stock.change]
             data[stock.name] = stockData
         df = pd.DataFrame(data)
         df.to_csv('StockMarket.csv')
@@ -62,7 +62,7 @@ class StockMarket:
         dfExtra = pd.DataFrame(names)
         df = pd.concat([dfExtra, df], ignore_index=True)
         df.reset_index()
-        df.rename(index={0: 'Stock', 1: 'Price', 2: 'Stability', 3: 'Stocks Owned', 4: 'Went up'}, inplace=True)
+        df.rename(index={0: 'Stock', 1: 'Price', 2: 'Stability', 3: 'Stocks Owned', 4: 'Change'}, inplace=True)
         df = df.transpose()
         df.drop('Unnamed: 0', axis=0, inplace=True)
 
@@ -106,12 +106,12 @@ class StockMarket:
         plt.savefig('stockMarket.png', bbox_inches='tight', dpi=300, transparent=True)
 
 class Stock:
-    def __init__(self, currentPrice, isSafe, stockName, numberOwned, wentUp):
+    def __init__(self, currentPrice, isSafe, stockName, numberOwned, change):
         self.name = stockName
         self.currentPrice = currentPrice
         self.isSafe = isSafe
         self.numberOwned = numberOwned # number of stocks actually owned
-        self.wentUp = wentUp
+        self.change = change
 
     def buyStock(self, numOfStocks, playerObject, stockMarketObject):
         amountToSpend = self.currentPrice*numOfStocks
@@ -144,11 +144,11 @@ class Stock:
         upOrDown = random.randrange(1, safetyVar)
         percentageChange = random.randrange(1, perVar)
         if upOrDown == 1:
-            self.wentUp = 'True'
+            self.change = 'True'
             self.currentPrice = self.currentPrice * (1 + (percentageChange / 100))
             self.currentPrice = round(self.currentPrice, 2)
         else:
-            self.wentUp = 'False'
+            self.change = 'False'
             self.currentPrice = self.currentPrice * (1 - (percentageChange / 100))
             self.currentPrice = round(self.currentPrice, 2)
 
