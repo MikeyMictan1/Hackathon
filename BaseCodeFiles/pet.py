@@ -64,6 +64,11 @@ class Pet(pygame.sprite.Sprite):
         self.hunger = self.hunger +  hungerChange
         if(hungerChange != 0):
             print (hungerChange,self.maxHunger)
+
+        if (self.hunger > self.maxHunger):
+        #
+            self.hunger = self.maxHunger
+        #
     #
     def setstats(self,petHappiness, petHunger, petThirst):
     #
@@ -74,14 +79,40 @@ class Pet(pygame.sprite.Sprite):
     def changeHappiness(self, happinessChange ):
     #
         self.happiness += happinessChange
+
+    #
+    def setMax(self):
+    #
+        if (self.happiness > self.maxHappiness):
+        #
+            self.happiness = self.maxHappiness
+        #
+        if (self.hunger > self.maxHunger):
+        #
+            print(self.maxHunger,"is new max hunger")
+            self.hunger = self.maxHunger
+        #
+        if (self.thirst > self.maxThirst):
+        #
+            self.thirst = self.maxThirst
+        #
+
     #
     def changeThirst(self, thirstChange ):
     #
         self.thirst += thirstChange
+        if (self.thirst > self.maxThirst):
+        #
+            self.thirst = self.maxThirst
+        #
     #
     def interestHappiness(self, happinessInterest ):
     #
         self.maxHappiness *= happinessInterest
+        if (self.happiness > self.maxHappiness):
+        #
+            self.happiness = self.maxHappiness
+        #
     #
     def getname(self):
     #
