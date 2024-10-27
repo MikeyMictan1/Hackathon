@@ -1,5 +1,3 @@
-import random
-
 class Tips:
     def __init__(self):
     #

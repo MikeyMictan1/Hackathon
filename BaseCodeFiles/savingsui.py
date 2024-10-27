@@ -5,7 +5,7 @@ import buttons as btn
 from shopui import *
 from datetime import datetime, timedelta
 from player import Player
-from savings import Savings
+
 
 class SavingsMenu(ShopMenu):
     """
@@ -24,8 +24,7 @@ class SavingsMenu(ShopMenu):
         self.player = player
         self.chip = chip
         self.bank_money = Player()
-        self.savingsAccount = Savings(self.player)
-        self.timer = self.savingsAccount.read_last_run_time()
+
 
         self.__in_game_menu_graphics_dict = {"continue": [], "overlay": [], "extract": [], "deposit": []}
         self.__in_game_menu_graphics_dict = gf.import_graphics_dict("ingamemenu", self.__in_game_menu_graphics_dict,
@@ -106,12 +105,11 @@ class SavingsMenu(ShopMenu):
         self.extract_savings_option.draw(pygame.display.get_surface())
 
         # deposit money
-        if self.add_savings_option.pressed and self.player.currentBalance > 0:
+        if self.add_savings_option.pressed:
             self.player.savings_balance += 10
             self.player.currentBalance -= 10
             time.sleep(0.2)
             self.add_savings_option.pressed = False
-            self.player.savingAccountOpen = True
 
         # extract money
         if self.extract_savings_option.pressed and self.player.savings_balance > 0:

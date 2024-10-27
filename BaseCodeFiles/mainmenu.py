@@ -1,6 +1,5 @@
 import sys
 import pygame
-
 import buttons as btn
 import globalfunctions as gf
 

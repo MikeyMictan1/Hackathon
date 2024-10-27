@@ -1,5 +1,4 @@
 import pygame
-import datetime
 import globalfunctions as gf
 from dataExtractor import DataHandler
 '''the things the pet should be able to do and the stats it should have:
@@ -54,7 +53,6 @@ class Pet(pygame.sprite.Sprite):
 
         self.rand_decor_img = pygame.image.load("../Graphics/pet/rand_decor.PNG")
         self.rand_decor_img = pygame.transform.scale(self.rand_decor_img, (150, 200))
-        # mikey pygame changes ----
     #
         self.dead = False
         self.name = "chip"
@@ -188,8 +186,6 @@ class Pet(pygame.sprite.Sprite):
         self.data.replace_value('currentRent', 40)
         self.data.replace_value('savingsBalance', 50)
 
-
-    # MIKEY PYGAME STUFF GO AWAY ADRIAN EWW C-CODER--------
     def update(self):
         self.hud()
         self.animation()

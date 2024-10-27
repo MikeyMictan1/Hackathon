@@ -1,5 +1,4 @@
 import pygame
-import globalfunctions as gf
 
 class GameCamera(pygame.sprite.Group):
     """
