@@ -36,7 +36,7 @@ class Savings:
             if self.minutes_difference > 0:
                 self.player.savings_balance = self.player.savings_balance * 1.025 * self.minutes_difference
 
-        # Update the last run time to the current time
+        # Update the last run time to the current times
         self.write_current_time()
 
         # Store the last checked minute for ongoing monitoring
