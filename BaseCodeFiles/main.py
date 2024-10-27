@@ -9,7 +9,7 @@ import savingsui as sav_menu
 from BaseCodeFiles.globalfunctions import tile_size
 import savings as sav
 import stockmarketui as stk_menu
-
+import resetui as res_menu
 
 #hi
 class Main:
@@ -29,6 +29,7 @@ class Main:
         self.in_game_menu = ig_menu.ShopMenu(self.__home_level.player, self.__home_level.chip)
         self.savings_menu = sav_menu.SavingsMenu(self.__home_level.player, self.__home_level.chip)
         self.stk_menu = stk_menu.StockMenu(self.__home_level.player, self.__home_level.chip)
+        self.res_menu = res_menu.ResetMenu(self.__home_level.player, self.__home_level.chip)
         self.savings = sav.Savings(self.__home_level.player)
 
         # decor stuffs
@@ -44,15 +45,17 @@ class Main:
                     break
 
                 # in-game menu
-                if event.type == pygame.KEYDOWN and (event.key == pygame.K_TAB or event.key == pygame.K_ESCAPE):
+                if event.type == pygame.KEYDOWN and (event.key == pygame.K_TAB):
                     self.in_game_menu.run_menu()
-                    print("in game menu opened?")
 
                 if event.type == pygame.KEYDOWN and (event.key == pygame.K_c):
                     self.savings_menu.run_menu()
 
                 if event.type == pygame.KEYDOWN and (event.key == pygame.K_s):
                     self.stk_menu.run_menu()
+
+                if event.type == pygame.KEYDOWN and (event.key == pygame.K_ESCAPE):
+                    self.res_menu.run_menu()
 
             self.__screen.fill("black")
 
@@ -75,6 +78,10 @@ class Main:
             if self.stk_menu.in_game_menu_state:
                 self.__handle_stocks_menu()
 
+            # -- CHECKS IF IN STOCK MENU --
+            if self.res_menu.in_game_menu_state:
+                self.__handle_reset_menu()
+
             self.saving_time()
             self.check_decor()
             pygame.display.update()
@@ -82,6 +89,9 @@ class Main:
 
     def __handle_stocks_menu(self):
         self.stk_menu.display_menu()
+
+    def __handle_reset_menu(self):
+        self.res_menu.display_menu()
 
     def __handle_savings_menu(self):
         """

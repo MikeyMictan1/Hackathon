@@ -18,5 +18,4 @@ Instructions to run the project<br>
 Special considerations, if any -- if any API keys are required (provide judges with link to generate key)
 we used 
 
-Architecture diagram
-![Architecture diagram](image.png)
+Could also include architecture diagrams in the file
