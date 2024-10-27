@@ -17,7 +17,7 @@ An example use case is a couple who have a 8-12 year old child. They would like 
 Instructions to run the project<br>
 Special considerations, if any -- if any API keys are required (provide judges with link to generate key)
 we used <br>
-panda,pygame,matplotlib libraries were used 
-
+panda,pygame,matplotlib python libraries were used and need to be installed before running the application 
+<br>
 Could also include architecture diagrams in the file
 ![Architecture Diagram](image.png)
