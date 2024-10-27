@@ -33,6 +33,7 @@ class StockMarket:
             data[stock.name] = stockData
         df = pd.DataFrame(data)
         df.to_csv('StockMarket.csv')
+        self.generateImage()
 
     def readCSV(self):
         df = pd.read_csv('StockMarket.csv')
@@ -99,19 +100,19 @@ class Stock:
         self.numberOwned = numberOwned # number of stocks actually owned
         self.wentUp = wentUp
 
-    def buyStock(self, numOfStocks, playerObject):
+    def buyStock(self, numOfStocks, playerObject, stockMarketObject):
         amountToSpend = self.currentPrice*numOfStocks
         if amountToSpend > playerObject.loadBalance():
             print("You don't have enough!")
         else:
             self.numberOwned += numOfStocks
-            playerObject.updateBalance(round(-(amountToSpend),2))
-        stockMarket.updateCSV()
+            playerObject.updateBalance(round(-amountToSpend, 2))
+        stockMarketObject.updateCSV()
 
-    def sellStock(self, numOfStocks, playerObject):
+    def sellStock(self, numOfStocks, playerObject, stockMarketObject):
         self.numberOwned -= numOfStocks
         playerObject.updateBalance(round(self.currentPrice * numOfStocks, 2))
-        stockMarket.updateCSV()
+        stockMarketObject.updateCSV()
 
     def updateStock(self):
         if self.isSafe == True:
