@@ -102,7 +102,7 @@ class Stock:
 
     def buyStock(self, numOfStocks, playerObject, stockMarketObject):
         amountToSpend = self.currentPrice*numOfStocks
-        if amountToSpend > playerObject.loadBalance():
+        if amountToSpend > playerObject.currentBalance:
             print("You don't have enough!")
         else:
             self.numberOwned += numOfStocks
@@ -133,7 +133,7 @@ class Stock:
             self.currentPrice = self.currentPrice * (1 - (percentageChange / 100))
             self.currentPrice = round(self.currentPrice, 2)
 
-
+"""
 stockMarket = StockMarket()
 stockMarket.readCSV()
 stockMarket.updateAllStocks()
@@ -145,3 +145,4 @@ print(test.currentBalance)
 stocks[0].buyStock(1, test)
 print(stocks[0].numberOwned)
 print(test.currentBalance)
+"""
