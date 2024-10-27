@@ -15,7 +15,7 @@ class Pet(pygame.sprite.Sprite):
         self.__wall_sprites = wall_sprites
         self.__position = pos
         self.__rect_width = 150
-        self.__rect_height = 200
+        self.__rect_height = 250
         self.__screen = pygame.display.get_surface()
         self.outfitted = False
         self.data = DataHandler()
