@@ -102,7 +102,7 @@ class Main:
 
     def __handle_in_game_menu(self):
         if self.in_game_menu.display_menu():
-            # recreates all levels and returns us to the menu
+            # recreates all levels and returns us to the menus
             ...
 
         if self.savings_menu.in_game_menu_state:
