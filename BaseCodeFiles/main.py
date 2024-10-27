@@ -66,7 +66,6 @@ class Main:
                 self.__handle_savings_menu()
 
             self.check_decor()
-            print("CHECKING DECOR HMMMMMMMM INTERESINT I SEE")
             pygame.display.update()
             self.__clock.tick(gf.FPS)
 
