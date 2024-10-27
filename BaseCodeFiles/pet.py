@@ -46,15 +46,17 @@ class Pet(pygame.sprite.Sprite):
     #increments hunger by a certain amount
     def changeHunger(self, hungerChange ):
     #
-        self.maxHunger += hungerChange
+        self.hunger = self.hunger +  hungerChange
+        if(hungerChange != 0):
+            print (hungerChange,self.maxHunger)
     #
     def changeHappiness(self, happinessChange ):
     #
-        self.maxHappiness += happinessChange
+        self.happiness += happinessChange
     #
     def changeThirst(self, thirstChange ):
     #
-        self.maxThirst += thirstChange
+        self.thirst += thirstChange
     #
     def interestHappiness(self, happinessInterest ):
     #
@@ -108,9 +110,16 @@ class Pet(pygame.sprite.Sprite):
 
     def updatePet(self,numhours):
     #
+        print(numhours * self.hungerTick,"this is going to be a negative number")
         self.changeHunger(self.hungerTick * numhours)
         self.changeThirst(self.thirstTick * numhours)
         self.updateHappiness(numhours)
+        if(numhours != 0):
+        #
+            print ("numhours is now",numhours)
+            print(numhours * self.hungerTick, "this is going to be a negative number")
+            print(self.hunger, self.happiness,"thirst is",self.thirst)
+        #
     #
     # MIKEY PYGAME STUFF GO AWAY ADRIAN EWW C-CODER--------
     def update(self):
