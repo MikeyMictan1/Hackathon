@@ -8,6 +8,7 @@ import ingamemenus as ig_menu
 import savingsui as sav_menu
 from BaseCodeFiles.globalfunctions import tile_size
 import savings as sav
+import stockmarketui as stk_menu
 
 
 #hi
@@ -27,6 +28,7 @@ class Main:
         self.game_over = g_change.GameOver()
         self.in_game_menu = ig_menu.InGameMenu(self.__home_level.player, self.__home_level.chip)
         self.savings_menu = sav_menu.SavingsMenu(self.__home_level.player, self.__home_level.chip)
+        self.stk_menu = stk_menu.StockMenu(self.__home_level.player, self.__home_level.chip)
         self.savings = sav.Savings(self.__home_level.player)
 
         # decor stuffs
@@ -48,7 +50,9 @@ class Main:
 
                 if event.type == pygame.KEYDOWN and (event.key == pygame.K_c):
                     self.savings_menu.run_menu()
-                    pass
+
+                if event.type == pygame.KEYDOWN and (event.key == pygame.K_s):
+                    self.stk_menu.run_menu()
 
             self.__screen.fill("black")
 
@@ -67,10 +71,17 @@ class Main:
             if self.savings_menu.in_game_menu_state:
                 self.__handle_savings_menu()
 
+            # -- CHECKS IF IN STOCK MENU --
+            if self.stk_menu.in_game_menu_state:
+                self.__handle_stocks_menu()
+
             self.saving_time()
             self.check_decor()
             pygame.display.update()
             self.__clock.tick(gf.FPS)
+
+    def __handle_stocks_menu(self):
+        self.stk_menu.display_menu()
 
     def __handle_savings_menu(self):
         """
