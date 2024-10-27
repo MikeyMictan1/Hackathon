@@ -1,6 +1,6 @@
-Hackathon <WHACK> README<br>
+#Hackathon <WHACK> README<br>
 
-Project name:Pet Payday<br><br>
+##Project name:Pet Payday<br><br>
 
 Description of the project:<br>
 Our mission: educating young chidlren on the importance of saving money by gamifying their learning experience. <br>
@@ -11,11 +11,12 @@ The player can also put money into a savings account which locks the money away 
 On the shop menu the users are told many tips about saving and increasing their financial literacy.
 <br><br>
 
-Use-case example<br>
+##Use-case example<br>
 An example use case is a couple who have a 8-12 year old child. They would like to teach their son the importance of saving money before setting up thier child with a bank account and or debit card. To do this they decide to install our app on their childs tablet or phone. Once their son gets home from school every day, he spends 5-10 minutes checking up on his pet. During this 10 minute period the child has many things he can do with his money. He is tasked with buying the dogs's outfit and every decorative item for the dogs room without letting the dog fall ill. This task is designed to take time and patience, if the child decides to buy some of the necessary decorations straight away, they will not have enough money for food later on. The child must wait till they have enough money to mantain the dog's health as well as have enough to save at the end of every week for spending on decorations. <br><br>
 
-Instructions to run the project<br>
+##Instructions to run the project<br>
 Special considerations, if any -- if any API keys are required (provide judges with link to generate key)
 we used 
 
-Could also include architecture diagrams in the file
+##Architecture diagram
+![Architecture diagram](image.png)
