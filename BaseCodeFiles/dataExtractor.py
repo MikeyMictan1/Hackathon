@@ -14,9 +14,9 @@ class DataHandler:
             writer.writerow(['currentBalance', 100])
             writer.writerow(['currentRent', 40])
             writer.writerow(['savingsBalance', 50])
-            writer.writerow(['healthLevel', 100])
             writer.writerow(['hungerLevel', 100])
             writer.writerow(['happinessLevel', 100])
+            writer.writerow(['thirstLevel', 100])
 
     def replace_value(self, dataType, new_value):
         with open(self.file_path, mode='r', newline='') as file:
@@ -45,9 +45,11 @@ class DataHandler:
 
 data_handler = DataHandler()
 
-'''
+
 #Example of how to use the functions for read and write data
+'''
 value = data_handler.read_value('currentBalance')
 print(f"The current balance is: {value}")
-data_handler.replace_value('currentBalance', '50')
+data_handler.replace_value('currentBalance', '25')
+print(f"The current balance is: {value}")
 '''

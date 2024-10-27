@@ -107,7 +107,6 @@ class MazeLevel:
     def __check_home_elements(self, cell: str, position: tuple):
         if cell == "P":
             self.chip = pet.Pet(position, [self.__game_camera], self.__wall_sprites)
-            self.chip.setMax()
 
 
     def compareTimeHours (self):
@@ -115,7 +114,7 @@ class MazeLevel:
         currentTime = datetime.now()
         difference = currentTime - self.lastTimeCheck
         diffHours = (difference.total_seconds() / 10)#hange this to 3600 later
-        #print("this is the diff in minutes ", diffHours)
+        print("this is the diff in minutes ", diffHours)
         if (diffHours > 1):
         #
             print("hange should happen")
@@ -149,7 +148,7 @@ class MazeLevel:
         hours = current_time.hour
         minutes = current_time.minute
         seconds = current_time.second
-        '''print(f"Hours: {hours}")
+        print(f"Hours: {hours}")
         print(f"Minutes: {minutes}")
         print(f"Seconds: {seconds}")
-        print("----------------------------------------")'''
+        print("----------------------------------------")
