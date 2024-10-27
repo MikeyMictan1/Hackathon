@@ -30,6 +30,21 @@ class Pet(pygame.sprite.Sprite):
         self.image = self.__animation_dict[self.__state][self.__frame]
         self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
         self.rect = self.image.get_rect(topleft=pos)
+
+        self.chips_abode_img = pygame.image.load("../Graphics/pet/chips_abode.png")
+        self.chips_abode_img = pygame.transform.scale(self.chips_abode_img, (350,300))
+
+        self.food_img = pygame.image.load("../Graphics/pet/food.png")
+        self.food_img = pygame.transform.scale(self.food_img, (40, 40))
+
+        self.happiness_img = pygame.image.load("../Graphics/pet/happiness.PNG")
+        self.happiness_img = pygame.transform.scale(self.happiness_img, (40, 40))
+
+        self.thirst_img = pygame.image.load("../Graphics/pet/thirst.png")
+        self.thirst_img = pygame.transform.scale(self.thirst_img, (40, 40))
+
+        self.rand_decor_img = pygame.image.load("../Graphics/pet/rand_decor.PNG")
+        self.rand_decor_img = pygame.transform.scale(self.rand_decor_img, (200, 200))
         # mikey pygame changes ---
     #
         self.dead = False
@@ -136,8 +151,11 @@ class Pet(pygame.sprite.Sprite):
         self.thirst_text= self.general_font.render(f"Thirst:       {self.thirst}", True, (255,255,255))
         self.__screen.blit(self.thirst_text,(gf.screen_width // 15, gf.screen_height // 6.5))
 
-        self.home_text = gf.smaller_title_font.render(f"Chip's Humble Abode", True, (255, 255, 255))
-        self.__screen.blit(self.home_text, (gf.img_centre(self.home_text)[0], gf.screen_height // 20))
+        self.__screen.blit(self.chips_abode_img, (gf.img_centre(self.chips_abode_img)[0], 0))
+        self.__screen.blit(self.food_img, (gf.screen_width // 30, gf.screen_height // 20))
+        self.__screen.blit(self.happiness_img, (gf.screen_width // 30, gf.screen_height // 10))
+        self.__screen.blit(self.thirst_img, (gf.screen_width // 30, gf.screen_height // 6.5))
+        self.__screen.blit(self.rand_decor_img, (gf.screen_width // 15, gf.screen_height //2))
 
     def animation(self):
         self.__frame += self.__frame_speed
