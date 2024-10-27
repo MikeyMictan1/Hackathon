@@ -9,6 +9,10 @@ class ResetMenu(ShopMenu):
         self.player = player
         self.chip = chip
         self.stock_market = invest.StockMarket()
+        self.stock1 = self.stock_market.readCSV()[0]
+        self.stock2 = self.stock_market.readCSV()[1]
+        self.stock3 = self.stock_market.readCSV()[2]
+        self.stock4 = self.stock_market.readCSV()[3]
 
         self.__in_game_menu_graphics_dict = {"continue": [], "overlay": [], "reset": []}
         self.__in_game_menu_graphics_dict = gf.import_graphics_dict("ingamemenu", self.__in_game_menu_graphics_dict,
@@ -79,6 +83,21 @@ class ResetMenu(ShopMenu):
             self.chip.happiness = 100
             self.player.currentBalance = 100
             self.player.savings_balance = 100
+
+            self.stock1.numberOwned = 0
+            self.stock1.currentPrice = 5
+
+            self.stock2.numberOwned = 0
+            self.stock2.currentPrice = 10
+
+            self.stock3.numberOwned = 0
+            self.stock3.currentPrice = 30
+
+            self.stock4.numberOwned = 0
+            self.stock4.currentPrice = 20
+
+            self.stock_market.resetStocks([self.stock1, self.stock2, self.stock3, self.stock4])
+
 
             self.reset_option.pressed = False
             time.sleep(0.2)

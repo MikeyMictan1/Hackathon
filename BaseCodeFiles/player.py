@@ -69,7 +69,6 @@ class Player:
             self.prevMonth = self.month
             self.prevWeek = self.week
 
-        print("Current Balance: ", self.currentBalance)
 
         self.saveBalance()
         self.saveRent()

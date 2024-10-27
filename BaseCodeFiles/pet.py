@@ -14,7 +14,7 @@ class Pet(pygame.sprite.Sprite):
         self.__wall_sprites = wall_sprites
         self.__position = pos
         self.__rect_width = 150
-        self.__rect_height = 200
+        self.__rect_height = 250
         self.__screen = pygame.display.get_surface()
         self.outfitted = False
         self.data = DataHandler()
@@ -166,15 +166,10 @@ class Pet(pygame.sprite.Sprite):
 
     def updatePet(self,numhours):
     #
-        print(numhours * self.hungerTick,"this is going to be a negative number")
         self.changeHunger(self.hungerTick * numhours)
         self.changeThirst(self.thirstTick * numhours)
         self.updateHappiness(numhours)
-        if(numhours != 0):
-        #
-            print ("numhours is now",numhours)
-            print(numhours * self.hungerTick, "this is going to be a negative number")
-            print(self.hunger, self.happiness,"thirst is",self.thirst)
+
         #
     #
 
@@ -220,10 +215,3 @@ class Pet(pygame.sprite.Sprite):
 
         self.image = self.__animation_dict[self.__state][int(self.__frame)]
         self.image = pygame.transform.scale(self.image, (self.__rect_width, self.__rect_height))
-
-'''test = Pet()
-test.changeHunger(-22)
-print(test.hunger, " is hunger")
-test.updatePet(3)
-print(test.happiness)
-print(test.hunger, " is hunger 2")'''

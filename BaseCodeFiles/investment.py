@@ -24,6 +24,15 @@ class StockMarket:
     def __init__(self):
         self.stocks = None
 
+    def resetStocks(self, new_stocks):
+        data = {}
+        for stock in new_stocks:
+            stockData = [stock.currentPrice, stock.isSafe, stock.numberOwned, stock.change]
+            data[stock.name] = stockData
+        df = pd.DataFrame(data)
+        df.to_csv('StockMarket.csv')
+        self.generateImage()
+
     def updateCSV(self):
         data = {}
         for stock in self.stocks:
