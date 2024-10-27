@@ -1,13 +1,8 @@
-import sys
-import time
-
-import pygame
-
+import sys, time, pygame
 import gamechange as g_change
 import globalfunctions as gf
 import buttons as btn
 from ingamemenus import *
-import SavingsAcc as sav_acc
 from datetime import datetime, timedelta
 from player import Player
 
@@ -28,7 +23,6 @@ class SavingsMenu(InGameMenu):
         super().__init__(player, chip)
         self.player = player
         self.chip = chip
-        self.savings = sav_acc.SavingsAcc(datetime(2020, 5, 17), 300)
         self.bank_money = Player()
 
 
