@@ -45,7 +45,7 @@ class Pet(pygame.sprite.Sprite):
 
         self.rand_decor_img = pygame.image.load("../Graphics/pet/rand_decor.PNG")
         self.rand_decor_img = pygame.transform.scale(self.rand_decor_img, (200, 200))
-        # mikey pygame changes ---
+        # mikey pygame changes ----
     #
         self.dead = False
         self.name = "chip"
